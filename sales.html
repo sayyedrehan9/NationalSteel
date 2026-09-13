@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>National Steel | Sales</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='background.css') }}">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+    --navy:#061827;
+    --navy2:#0a334b;
+    --teal:#08b7d0;
+    --teal2:#087d9f;
+    --bg:#f4f7f9;
+    --text:#173243;
+    --muted:#829099;
+    --line:#e4ecef;
+    --white:#fff;
+}
+body{font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text)}
+a{text-decoration:none}
+.sidebar{position:fixed;left:0;top:0;width:255px;height:100vh;padding:22px 15px;background:linear-gradient(160deg,#041421,#0a334b 72%,#08273a);color:#fff;box-shadow:8px 0 30px #00111d18;z-index:20}
+.brand{text-align:center;padding:4px 5px 23px;border-bottom:1px solid #ffffff18}
+.brand img{width:76px;height:76px;object-fit:contain;background:#fff;padding:5px;border-radius:18px;box-shadow:0 8px 25px #0005}
+.brand h2{font-size:20px;margin-top:10px;letter-spacing:1px}
+.brand p{color:#21c7df;font-size:10px;font-weight:bold;margin-top:5px;letter-spacing:.7px}
+.menu{margin-top:21px}
+.menu-title{color:#6e8b9a;font-size:9px;font-weight:bold;letter-spacing:1.5px;padding:0 15px 9px}
+.menu a{display:flex;align-items:center;gap:12px;color:#d6e4e9;padding:12px 14px;margin:5px 0;border-radius:11px;font-size:13px;transition:.2s}
+.menu a:hover{background:#ffffff12;transform:translateX(3px)}
+.menu a.active{background:linear-gradient(90deg,#08b9d2,#087e9f);color:#fff;box-shadow:0 8px 20px #00a9c733}
+.nav-icon{width:22px;text-align:center;font-size:15px}
+.logout{position:absolute;left:15px;right:15px;bottom:21px}
+.logout a{display:block;text-align:center;color:#fff;background:#d93a3a;padding:12px;border-radius:11px;font-size:13px;font-weight:bold;transition:.2s}
+.logout a:hover{background:#bd2929}
+.main{margin-left:255px;min-height:100vh}
+.topbar{height:76px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 32px;position:sticky;top:0;z-index:10}
+.top-title{display:flex;align-items:center;gap:12px}
+.top-title h1{font-size:23px;color:#102d3f}
+.status{display:flex;align-items:center;gap:6px;padding:6px 10px;background:#ecfaf5;color:#218454;border-radius:20px;font-size:9px;font-weight:bold}
+.status-dot{width:7px;height:7px;border-radius:50%;background:#2dbb74}
+.owner{display:flex;align-items:center;gap:9px;padding:8px 13px;background:#eef9fb;border:1px solid #d9eff2;border-radius:28px;color:#08778f;font-size:12px;font-weight:bold}
+.avatar{width:29px;height:29px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:#087d9f;color:#fff}
+.content{padding:28px 32px 40px}
+.hero{min-height:180px;padding:30px 33px;border-radius:22px;color:#fff;background:linear-gradient(135deg,#061b2d,#087991 70%,#079db0);position:relative;overflow:hidden;box-shadow:0 17px 38px #07566e25;margin-bottom:23px}
+.hero:before{content:"";position:absolute;width:320px;height:320px;right:-85px;top:-135px;border:55px solid #ffffff10;border-radius:50%}
+.hero:after{content:"";position:absolute;width:170px;height:170px;right:100px;bottom:-120px;border:32px solid #ffffff09;border-radius:50%}
+.hero-content{position:relative;z-index:2}
+.hero h2{font-size:29px;margin-bottom:9px}
+.hero p{max-width:720px;color:#d8edf1;font-size:13px;line-height:1.7}
+.hero-tag{display:inline-block;margin-top:17px;padding:8px 12px;border:1px solid #ffffff30;border-radius:20px;font-size:10px;font-weight:bold}
+.summary{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:22px}
+.summary-card{background:#fff;border:1px solid var(--line);border-radius:17px;padding:20px;box-shadow:0 6px 22px #00121c08;position:relative;overflow:hidden}
+.summary-card:before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--teal)}
+.summary-icon{width:43px;height:43px;border-radius:13px;background:#eaf8fa;display:flex;align-items:center;justify-content:center;font-size:20px}
+.summary-label{margin-top:14px;color:#849198;font-size:10px;font-weight:bold;letter-spacing:.5px}
+.summary-value{margin-top:6px;color:#102f43;font-size:24px;font-weight:bold}
+.summary-text{color:#98a4a9;font-size:10px;margin-top:6px}
+.sales-layout{display:grid;grid-template-columns:1.25fr .75fr;gap:21px}
+.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:25px;box-shadow:0 7px 24px #00121c09}
+.card-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px}
+.card-head-left{display:flex;align-items:center;gap:12px}
+.card-icon{width:45px;height:45px;border-radius:13px;background:#eaf8fa;display:flex;align-items:center;justify-content:center;font-size:21px}
+.card-head h3{font-size:18px;color:#102f43}
+.card-head p{font-size:10px;color:#8a969c;margin-top:4px}
+.card-head-right{padding:7px 10px;border-radius:20px;background:#f0f8fa;color:#087d97;font-size:9px;font-weight:bold}
+.form-group{margin-bottom:18px}
+.form-group label{display:block;color:#425864;font-size:12px;font-weight:bold;margin-bottom:7px}
+.form-group select,.form-group input{width:100%;padding:14px;border:1px solid #dce5e9;border-radius:11px;outline:none;background:#fbfcfd;color:#183442;font-size:13px;transition:.2s}
+.form-group select:focus,.form-group input:focus{border-color:#08acc5;box-shadow:0 0 0 3px #08acc51a;background:#fff}
+.product-preview{margin:18px 0;padding:17px;border-radius:13px;background:linear-gradient(135deg,#f0fafb,#f8fbfc);border:1px solid #dceff2}
+.preview-label{color:#8a969c;font-size:9px;font-weight:bold;text-transform:uppercase}
+.preview-name{color:#123447;font-size:16px;font-weight:bold;margin-top:5px}
+.preview-price{color:#087d97;font-size:12px;margin-top:5px}
+.quantity-row{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.total-box{display:flex;align-items:center;justify-content:space-between;padding:16px;margin:4px 0 17px;border-radius:13px;background:#061f31;color:#fff}
+.total-box span{font-size:11px;color:#bcd6dd}
+.total-box strong{font-size:20px}
+.submit{width:100%;border:0;padding:15px;border-radius:11px;background:linear-gradient(90deg,#08b7d0,#087d9f);color:#fff;font-size:13px;font-weight:bold;cursor:pointer;transition:.2s}
+.submit:hover{transform:translateY(-2px);box-shadow:0 10px 24px #087d9f30}
+.info-list{display:grid;gap:12px}
+.info-item{padding:15px;border:1px solid #e7edef;border-radius:12px;background:#fafcfd}
+.info-item-title{color:#29424f;font-size:12px;font-weight:bold}
+.info-item-text{color:#89969c;font-size:10px;line-height:1.6;margin-top:5px}
+.quick-links{margin-top:20px}
+.quick-links h4{color:#3c535e;font-size:12px;margin-bottom:10px}
+.quick-link{display:flex;align-items:center;justify-content:space-between;padding:11px 12px;margin:7px 0;border-radius:10px;background:#f1f9fa;color:#08788f;font-size:11px;font-weight:bold;border:1px solid #dceff2}
+.quick-link span{color:#93a0a5;font-size:9px}
+.recent{margin-top:21px}
+.recent-row{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid #edf1f3}
+.recent-row:last-child{border-bottom:0}
+.sale-left{display:flex;align-items:center;gap:11px}
+.sale-icon{width:37px;height:37px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:#edf8fa;font-size:16px}
+.sale-name{color:#29404d;font-size:12px;font-weight:bold}
+.sale-meta{color:#8c989e;font-size:10px;margin-top:4px}
+.sale-total{color:#087d97;font-size:12px;font-weight:bold}
+.empty{text-align:center;padding:28px 12px;border-radius:12px;background:#f7f9fa;color:#7d8a91;font-size:11px}
+@media(max-width:1050px){.summary{grid-template-columns:1fr 1fr}.sales-layout{grid-template-columns:1fr}}
+@media(max-width:850px){.sidebar{width:215px}.main{margin-left:215px}.content{padding:22px 20px}}
+@media(max-width:620px){.sidebar{position:relative;width:100%;height:auto}.main{margin-left:0}.logout{position:static;margin-top:20px}.topbar{position:relative;padding:0 16px}.top-title h1{font-size:19px}.status{display:none}.owner{font-size:10px}.content{padding:16px}.summary{grid-template-columns:1fr}.hero{padding:25px 22px}.hero h2{font-size:23px}.quantity-row{grid-template-columns:1fr}}
+</style>
+</head>
+
+<body>
+
+<aside class="sidebar">
+    <div class="brand">
+        <img src="{{ url_for('static', filename='logo.jpg.jpeg') }}" alt="National Steel Logo">
+        <h2>NATIONAL STEEL</h2>
+        <p>OWNER MANAGEMENT SYSTEM</p>
+    </div>
+
+    <nav class="menu">
+        <div class="menu-title">MAIN MENU</div>
+        <a href="{{ url_for('owner_dashboard') }}"><span class="nav-icon">📊</span>Dashboard</a>
+        <a href="{{ url_for('products') }}"><span class="nav-icon">📦</span>Products</a>
+        <a href="{{ url_for('add_product') }}"><span class="nav-icon">➕</span>Add Product</a>
+
+        <div class="menu-title" style="margin-top:18px">BUSINESS</div>
+        <a href="{{ url_for('sales') }}" class="active"><span class="nav-icon">💰</span>Sales</a>
+        <a href="{{ url_for('sales_history') }}"><span class="nav-icon">🧾</span>Sales History</a>
+        <a href="{{ url_for('reports') }}"><span class="nav-icon">📈</span>Reports</a>
+        <a href="{{ url_for('about') }}"><span class="nav-icon">ℹ️</span>About</a>
+    </nav>
+
+    <div class="logout">
+        <a href="{{ url_for('owner_logout') }}">🚪 &nbsp; Logout</a>
+    </div>
+</aside>
+
+<main class="main">
+<header class="topbar">
+    <div class="top-title">
+        <h1>Sales Management</h1>
+        <div class="status"><span class="status-dot"></span>SYSTEM ACTIVE</div>
+    </div>
+    <div class="owner"><div class="avatar">R</div>Owner: Rizwan</div>
+</header>
+
+<section class="content">
+
+    <div class="hero">
+        <div class="hero-content">
+            <h2>Record a New Sale 💰</h2>
+            <p>Create a sales transaction for any product in your National Steel inventory. Select the product, enter the quantity sold and the system will calculate the total sale amount.</p>
+            <span class="hero-tag">🏭 NATIONAL STEEL • SALES MANAGEMENT CENTER</span>
+        </div>
+    </div>
+
+    <div class="summary">
+        <div class="summary-card">
+            <div class="summary-icon">💰</div>
+            <div class="summary-label">TOTAL SALES</div>
+            <div class="summary-value">₹{{ "%.2f"|format(total_sales|default(0)|float) }}</div>
+            <div class="summary-text">Recorded sales revenue</div>
+        </div>
+
+        <div class="summary-card">
+            <div class="summary-icon">🧾</div>
+            <div class="summary-label">SALES ENTRIES</div>
+            <div class="summary-value">{{ total_sale_entries|default(0) }}</div>
+            <div class="summary-text">Transactions recorded</div>
+        </div>
+
+        <div class="summary-card">
+            <div class="summary-icon">📦</div>
+            <div class="summary-label">AVAILABLE PRODUCTS</div>
+            <div class="summary-value">{{ products|length if products else 0 }}</div>
+            <div class="summary-text">Products available for sale</div>
+        </div>
+    </div>
+
+    <div class="sales-layout">
+
+        <div class="card">
+            <div class="card-head">
+                <div class="card-head-left">
+                    <div class="card-icon">💳</div>
+                    <div>
+                        <h3>New Sale Transaction</h3>
+                        <p>Enter sale details below</p>
+                    </div>
+                </div>
+                <div class="card-head-right">NEW SALE</div>
+            </div>
+
+            <form method="POST" action="{{ url_for('sales') }}" onsubmit="return validateSale()">
+
+                <div class="form-group">
+                    <label>Select Product</label>
+
+                    <select name="product_id" id="product" required onchange="updateProduct()">
+                        <option value="">-- Select Steel Product --</option>
+
+                        {% if products %}
+                            {% for product in products %}
+                            <option
+                                value="{{ product['id'] }}"
+                                data-price="{{ product['price']|default(0) }}"
+                                data-stock="{% if product['stock'] is defined %}{{ product['stock']|default(0) }}{% elif product['quantity'] is defined %}{{ product['quantity']|default(0) }}{% else %}0{% endif %}"
+                                data-quantity="{% if product['quantity'] is defined %}{{ product['quantity']|default(0) }}{% elif product['stock'] is defined %}{{ product['stock']|default(0) }}{% else %}0{% endif %}"
+                                data-name="{{ product['name'] }}"
+                            >
+                                {{ product['name'] }} — ₹{{ "%.2f"|format(product['price']|default(0)|float) }}
+                            </option>
+                            {% endfor %}
+                        {% endif %}
+                    </select>
+                </div>
+
+                <div class="product-preview">
+                    <div class="preview-label">Selected Product</div>
+                    <div class="preview-name" id="previewName">Select a product above</div>
+                    <div class="preview-price" id="previewPrice">Product price will appear here</div>
+                </div>
+
+                <div class="quantity-row">
+                    <div class="form-group">
+                        <label>Quantity Sold</label>
+                        <input type="number" name="quantity" id="quantity" min="1" placeholder="Example: 5" required oninput="calculateTotal()">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Available Stock</label>
+                        <input type="text" id="stock" value="Select product" readonly>
+                    </div>
+                </div>
+
+                <div class="total-box">
+                    <span>Estimated Sale Total</span>
+                    <strong id="total">₹0.00</strong>
+                </div>
+
+                <button type="submit" class="submit">💰 Record Sale & Update Stock</button>
+            </form>
+        </div>
+
+        <div class="card">
+            <div class="card-head">
+                <div class="card-head-left">
+                    <div class="card-icon">💡</div>
+                    <div>
+                        <h3>Sales Guide</h3>
+                        <p>Quick help for owner</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-list">
+                <div class="info-item">
+                    <div class="info-item-title">01 • Select Product</div>
+                    <div class="info-item-text">Choose the steel product that was sold from the product dropdown.</div>
+                </div>
+
+                <div class="info-item">
+                    <div class="info-item-title">02 • Enter Quantity</div>
+                    <div class="info-item-text">Enter the number of units sold. Do not enter a quantity greater than available stock.</div>
+                </div>
+
+                <div class="info-item">
+                    <div class="info-item-title">03 • Check Total</div>
+                    <div class="info-item-text">The estimated sale amount is calculated automatically from product price × quantity.</div>
+                </div>
+
+                <div class="info-item">
+                    <div class="info-item-title">04 • Record Sale</div>
+                    <div class="info-item-text">Click Record Sale. The transaction is saved and inventory stock is updated.</div>
+                </div>
+            </div>
+
+            <div class="quick-links">
+                <h4>Quick Navigation</h4>
+
+                <a class="quick-link" href="{{ url_for('sales_history') }}">
+                    🧾 Sales History <span>View transactions →</span>
+                </a>
+
+                <a class="quick-link" href="{{ url_for('products') }}">
+                    📦 Product Inventory <span>Check stock →</span>
+                </a>
+
+                <a class="quick-link" href="{{ url_for('reports') }}">
+                    📈 Business Reports <span>View reports →</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="card recent">
+        <div class="card-head">
+            <div class="card-head-left">
+                <div class="card-icon">🧾</div>
+                <div>
+                    <h3>Recent Sales Activity</h3>
+                    <p>Latest transactions from your database</p>
+                </div>
+            </div>
+            <div class="card-head-right">LIVE DATA</div>
+        </div>
+
+        <div>
+            {% if recent_sales %}
+                {% for sale in recent_sales %}
+                <div class="recent-row">
+                    <div class="sale-left">
+                        <div class="sale-icon">₹</div>
+                        <div>
+                            <div class="sale-name">{{ sale["product_name"] }}</div>
+                            <div class="sale-meta">
+                                Quantity: {{ sale["quantity"] }} &nbsp; • &nbsp; {{ sale["sale_date"] }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sale-total">
+                        ₹{{ "%.2f"|format(sale["total"]|default(0)|float) }}
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="empty">
+                    🧾 No sales recorded yet. Your latest transactions will appear here.
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+</section>
+</main>
+
+<script>
+let currentPrice = 0;
+let currentStock = 0;
+
+function updateProduct() {
+    const select = document.getElementById("product");
+    const previewName = document.getElementById("previewName");
+    const previewPrice = document.getElementById("previewPrice");
+    const stockInput = document.getElementById("stock");
+    const totalBox = document.getElementById("total");
+
+    if (!select || !previewName || !previewPrice || !stockInput || !totalBox) {
+        return;
+    }
+
+    const option = select.options[select.selectedIndex];
+
+    if (!option || !option.value) {
+        currentPrice = 0;
+        currentStock = 0;
+        previewName.textContent = "Select a product above";
+        previewPrice.textContent = "Product price will appear here";
+        stockInput.value = "Select product";
+        totalBox.textContent = "₹0.00";
+        return;
+    }
+
+    const name = option.getAttribute("data-name") || option.textContent.trim();
+    const price = parseFloat(option.getAttribute("data-price") || "0") || 0;
+    let stock = parseInt(option.getAttribute("data-stock") || "", 10);
+    const quantityStock = parseInt(option.getAttribute("data-quantity") || "", 10);
+
+    if (isNaN(stock)) {
+        stock = isNaN(quantityStock) ? 0 : quantityStock;
+    }
+
+    currentPrice = price;
+    currentStock = stock;
+
+    previewName.textContent = name;
+    previewPrice.textContent = "Selling price: ₹" + price.toFixed(2) + " per unit";
+    stockInput.value = stock + (stock === 1 ? " unit available" : " units available");
+
+    calculateTotal();
+}
+
+function calculateTotal() {
+    const quantityInput = document.getElementById("quantity");
+    const totalBox = document.getElementById("total");
+
+    if (!quantityInput || !totalBox) {
+        return;
+    }
+
+    const quantity = parseInt(quantityInput.value, 10) || 0;
+    const total = currentPrice * quantity;
+
+    totalBox.textContent = "₹" + total.toFixed(2);
+}
+
+function validateSale() {
+    const select = document.getElementById("product");
+    const quantityInput = document.getElementById("quantity");
+
+    if (!select || !quantityInput) {
+        return false;
+    }
+
+    const quantity = parseInt(quantityInput.value, 10) || 0;
+
+    if (!select.value) {
+        alert("Please select a product.");
+        return false;
+    }
+
+    if (quantity <= 0) {
+        alert("Please enter a valid quantity.");
+        return false;
+    }
+
+    if (quantity > currentStock) {
+        alert(
+            "Not enough stock available.\n\n" +
+            "Available stock: " + currentStock + " units"
+        );
+        return false;
+    }
+
+    return true;
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    const select = document.getElementById("product");
+    const quantityInput = document.getElementById("quantity");
+
+    if (select) {
+        select.addEventListener("change", updateProduct);
+    }
+
+    if (quantityInput) {
+        quantityInput.addEventListener("input", calculateTotal);
+    }
+
+    updateProduct();
+    calculateTotal();
+});
+</script>
+
+</body>
+</html>

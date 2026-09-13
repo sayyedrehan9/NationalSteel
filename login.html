@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Owner Login | National Steel</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background:
+                linear-gradient(rgba(3, 12, 20, 0.88), rgba(3, 12, 20, 0.94)),
+                url("/static/logo.jpg.jpeg");
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .login-card {
+            width: 100%;
+            max-width: 430px;
+            background: rgba(255, 255, 255, 0.97);
+            border-radius: 22px;
+            padding: 38px 35px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
+        }
+
+        .logo-box {
+            text-align: center;
+            margin-bottom: 22px;
+        }
+
+        .logo-box img {
+            width: 85px;
+            height: 85px;
+            object-fit: contain;
+            border-radius: 14px;
+        }
+
+        .brand {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .brand h1 {
+            font-size: 29px;
+            color: #102c40;
+            letter-spacing: 1px;
+        }
+
+        .brand p {
+            margin-top: 7px;
+            color: #66727a;
+            font-size: 14px;
+        }
+
+        .owner-title {
+            text-align: center;
+            color: #079bc1;
+            font-size: 17px;
+            font-weight: bold;
+            margin-bottom: 25px;
+        }
+
+        .input-group {
+            margin-bottom: 19px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #253744;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 14px 15px;
+            border: 1px solid #d5dce0;
+            border-radius: 10px;
+            font-size: 15px;
+            outline: none;
+            transition: 0.25s;
+        }
+
+        .input-group input:focus {
+            border-color: #079bc1;
+            box-shadow: 0 0 0 3px rgba(7, 155, 193, 0.12);
+        }
+
+        .login-btn {
+            width: 100%;
+            border: none;
+            padding: 15px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #079bc1, #056b91);
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 5px;
+            transition: 0.25s;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(5, 107, 145, 0.3);
+        }
+
+        .error {
+            background: #ffe8e8;
+            color: #c62828;
+            border: 1px solid #ffcaca;
+            padding: 11px;
+            border-radius: 9px;
+            text-align: center;
+            margin-bottom: 18px;
+            font-size: 14px;
+        }
+
+        .back-home {
+            display: block;
+            text-align: center;
+            margin-top: 22px;
+            color: #079bc1;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .back-home:hover {
+            text-decoration: underline;
+        }
+
+        .security {
+            text-align: center;
+            margin-top: 25px;
+            color: #8a959b;
+            font-size: 12px;
+        }
+
+        @media (max-width: 500px) {
+            .login-card {
+                padding: 30px 23px;
+            }
+
+            .brand h1 {
+                font-size: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="login-card">
+
+        <div class="logo-box">
+            <img src="/static/logo.jpg.jpeg" alt="National Steel Logo">
+        </div>
+
+        <div class="brand">
+            <h1>NATIONAL STEEL</h1>
+            <p>Quality Steel • Trusted Service</p>
+        </div>
+
+        <div class="owner-title">
+            🔐 OWNER MANAGEMENT LOGIN
+        </div>
+
+        {% if error %}
+            <div class="error">
+                {{ error }}
+            </div>
+        {% endif %}
+
+        <form method="POST" action="{{ url_for('owner_login') }}">
+
+            <div class="input-group">
+                <label for="username">Username</label>
+                <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    placeholder="Enter owner username"
+                    required
+                    autocomplete="username"
+                >
+            </div>
+
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Enter owner password"
+                    required
+                    autocomplete="current-password"
+                >
+            </div>
+
+            <button type="submit" class="login-btn">
+                LOGIN TO DASHBOARD
+            </button>
+
+        </form>
+
+        <a href="{{ url_for('home') }}" class="back-home">
+            ← Back to National Steel Website
+        </a>
+
+        <div class="security">
+            🔒 Owner access only
+        </div>
+
+    </div>
+
+</body>
+</html>

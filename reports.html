@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>National Steel | Reports</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='background.css') }}">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f6f7;
+            color: #18222b;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* ================= SIDEBAR ================= */
+
+        .sidebar {
+            width: 255px;
+            background: #11151b;
+            color: white;
+            padding: 25px 18px;
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            overflow-y: auto;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 5px 8px 30px;
+        }
+
+        .brand-logo {
+            width: 52px;
+            height: 52px;
+            border-radius: 12px;
+            object-fit: cover;
+            border: 2px solid #ffffff;
+        }
+
+        .brand-text h2 {
+            font-size: 20px;
+            letter-spacing: .3px;
+        }
+
+        .brand-text p {
+            font-size: 10px;
+            color: #aeb7c0;
+            margin-top: 4px;
+        }
+
+        .menu-title {
+            color: #78818a;
+            font-size: 10px;
+            letter-spacing: 2px;
+            margin: 15px 8px 10px;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            padding: 13px 12px;
+            border-radius: 9px;
+            margin-bottom: 5px;
+            color: #d5d9dd;
+            font-size: 14px;
+            transition: .2s;
+        }
+
+        .nav-link:hover {
+            background: #202630;
+            color: white;
+        }
+
+        .nav-link.active {
+            background: #202a34;
+            border-left: 4px solid #f5a623;
+            color: white;
+        }
+
+        .nav-icon {
+            width: 20px;
+            text-align: center;
+            font-size: 15px;
+        }
+
+        .owner-box {
+            margin-top: 30px;
+            padding: 17px 12px;
+            border-top: 1px solid #2b3038;
+        }
+
+        .owner-label {
+            font-size: 9px;
+            color: #7e8790;
+            letter-spacing: 1px;
+            margin-bottom: 7px;
+        }
+
+        .owner-name {
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 14px;
+        }
+
+        .logout {
+            display: block;
+            text-align: center;
+            padding: 10px;
+            border-radius: 7px;
+            background: #261d20;
+            color: #ff9c9c;
+            font-size: 13px;
+        }
+
+        .logout:hover {
+            background: #382124;
+        }
+
+        /* ================= MAIN ================= */
+
+        .main {
+            margin-left: 255px;
+            width: calc(100% - 255px);
+            padding: 30px 38px 45px;
+        }
+
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .breadcrumb {
+            color: #7b838a;
+            font-size: 13px;
+        }
+
+        .breadcrumb strong {
+            color: #1b2228;
+        }
+
+        .access {
+            font-size: 12px;
+            color: #667078;
+        }
+
+        .access span {
+            color: #218653;
+            font-weight: bold;
+        }
+
+        /* ================= HERO ================= */
+
+        .hero {
+            background: linear-gradient(110deg, #101923, #1d3442);
+            color: white;
+            border-radius: 18px;
+            padding: 34px 38px;
+            margin-bottom: 25px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero:after {
+            content: "";
+            position: absolute;
+            width: 240px;
+            height: 240px;
+            border-radius: 50%;
+            right: -80px;
+            top: -100px;
+            border: 35px solid rgba(255,255,255,.04);
+        }
+
+        .hero-label {
+            color: #f2ad38;
+            font-size: 11px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .hero h1 {
+            font-size: 34px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            max-width: 760px;
+            color: #cbd4da;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 22px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 11px 17px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .btn-orange {
+            background: #f4a62a;
+            color: #171717;
+        }
+
+        .btn-dark {
+            background: rgba(255,255,255,.1);
+            color: white;
+            border: 1px solid rgba(255,255,255,.15);
+        }
+
+        /* ================= CARDS ================= */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            margin-bottom: 28px;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid #e8ebed;
+            border-radius: 14px;
+            padding: 21px;
+            box-shadow: 0 4px 16px rgba(0,0,0,.03);
+        }
+
+        .card-label {
+            color: #777f85;
+            font-size: 12px;
+            margin-bottom: 12px;
+        }
+
+        .card-value {
+            font-size: 26px;
+            font-weight: bold;
+            color: #17212a;
+        }
+
+        .card-note {
+            color: #9aa1a6;
+            font-size: 11px;
+            margin-top: 8px;
+        }
+
+        /* ================= GRID ================= */
+
+        .report-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 22px;
+            margin-bottom: 24px;
+        }
+
+        .section-card {
+            background: white;
+            border: 1px solid #e7eaec;
+            border-radius: 15px;
+            padding: 24px;
+            box-shadow: 0 4px 16px rgba(0,0,0,.03);
+        }
+
+        .section-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .section-title h2 {
+            font-size: 19px;
+        }
+
+        .section-title p {
+            font-size: 11px;
+            color: #899198;
+            margin-top: 5px;
+        }
+
+        /* ================= CATEGORY ================= */
+
+        .category-row {
+            margin-bottom: 17px;
+        }
+
+        .category-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .category-top span:first-child {
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .category-top span:last-child {
+            font-size: 12px;
+            color: #687179;
+        }
+
+        .bar {
+            width: 100%;
+            height: 9px;
+            background: #edf0f1;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .bar-fill {
+            height: 100%;
+            width: 50%;
+            background: #f1a52b;
+            border-radius: 20px;
+        }
+
+        /* ================= LOW STOCK ================= */
+
+        .stock-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 0;
+            border-bottom: 1px solid #edf0f2;
+        }
+
+        .stock-item:last-child {
+            border-bottom: none;
+        }
+
+        .stock-name {
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .stock-category {
+            color: #8a9298;
+            font-size: 11px;
+            margin-top: 4px;
+        }
+
+        .stock-number {
+            background: #fff1df;
+            color: #bd7111;
+            padding: 7px 10px;
+            border-radius: 7px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        /* ================= SALES TABLE ================= */
+
+        .full-card {
+            background: white;
+            border: 1px solid #e7eaec;
+            border-radius: 15px;
+            padding: 24px;
+            box-shadow: 0 4px 16px rgba(0,0,0,.03);
+            margin-bottom: 24px;
+        }
+
+        .table-wrap {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th {
+            text-align: left;
+            padding: 13px 10px;
+            font-size: 11px;
+            color: #7a838a;
+            border-bottom: 1px solid #e4e7e9;
+            text-transform: uppercase;
+        }
+
+        td {
+            padding: 15px 10px;
+            border-bottom: 1px solid #eef0f1;
+            font-size: 13px;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .amount {
+            font-weight: bold;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 5px 9px;
+            border-radius: 20px;
+            background: #e9f8ef;
+            color: #21824d;
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 35px;
+            color: #92999e;
+            font-size: 13px;
+        }
+
+        /* ================= QUICK REPORT ================= */
+
+        .quick-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .quick-box {
+            padding: 18px;
+            border: 1px solid #e9ecee;
+            border-radius: 11px;
+            background: #fafbfb;
+        }
+
+        .quick-box h3 {
+            font-size: 14px;
+            margin-bottom: 7px;
+        }
+
+        .quick-box p {
+            font-size: 11px;
+            color: #858e95;
+            line-height: 1.5;
+        }
+
+        /* ================= FOOTER ================= */
+
+        .footer {
+            text-align: center;
+            color: #92999e;
+            font-size: 11px;
+            padding: 15px;
+        }
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 1000px) {
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .report-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .quick-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .sidebar {
+                width: 210px;
+            }
+
+            .main {
+                margin-left: 210px;
+                width: calc(100% - 210px);
+                padding: 20px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 26px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="layout">
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+        <div class="brand">
+
+            <img
+                src="{{ url_for('static', filename='logo.jpg.jpeg') }}"
+                class="brand-logo"
+                alt="National Steel Logo"
+            >
+
+            <div class="brand-text">
+                <h2>National Steel</h2>
+                <p>Owner Management System</p>
+            </div>
+
+        </div>
+
+        <div class="menu-title">MAIN MENU</div>
+
+        <a href="/owner-dashboard" class="nav-link">
+            <span class="nav-icon">⌂</span>
+            <span>Dashboard</span>
+        </a>
+
+        <a href="/products" class="nav-link">
+            <span class="nav-icon">▣</span>
+            <span>Products</span>
+        </a>
+
+        <a href="/add-product" class="nav-link">
+            <span class="nav-icon">＋</span>
+            <span>Add Product</span>
+        </a>
+
+        <a href="/sales" class="nav-link">
+            <span class="nav-icon">₹</span>
+            <span>Sales</span>
+        </a>
+
+        <a href="/sales-history" class="nav-link">
+            <span class="nav-icon">◷</span>
+            <span>Sales History</span>
+        </a>
+
+        <div class="menu-title">MANAGEMENT</div>
+
+        <a href="/reports" class="nav-link active">
+            <span class="nav-icon">▤</span>
+            <span>Reports</span>
+        </a>
+
+        <a href="/about" class="nav-link">
+            <span class="nav-icon">ⓘ</span>
+            <span>About</span>
+        </a>
+
+        <div class="owner-box">
+            <div class="owner-label">LOGGED IN AS</div>
+
+            <div class="owner-name">
+                Rizwan • Owner
+            </div>
+
+            <!-- Direct route used so logout endpoint error does not occur -->
+            <a href="/owner-logout" class="logout">
+                Logout
+            </a>
+        </div>
+
+    </aside>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="main">
+
+        <div class="topbar">
+
+            <div class="breadcrumb">
+                National Steel / <strong>Reports</strong>
+            </div>
+
+            <div class="access">
+                ● <span>Owner Access</span>
+            </div>
+
+        </div>
+
+
+        <!-- ================= HERO ================= -->
+
+        <section class="hero">
+
+            <div class="hero-label">
+                BUSINESS ANALYTICS
+            </div>
+
+            <h1>Reports & Analytics</h1>
+
+            <p>
+                Monitor National Steel business performance, sales activity,
+                inventory health and low-stock products from one place.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="/sales" class="btn btn-orange">
+                    + Create Sale
+                </a>
+
+                <a href="/products" class="btn btn-dark">
+                    View Inventory
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= STATS ================= -->
+
+        <section class="stats">
+
+            <div class="card">
+                <div class="card-label">
+                    Total Sales
+                </div>
+
+                <div class="card-value">
+                    ₹{{ "%.2f"|format(total_sales|default(0)) }}
+                </div>
+
+                <div class="card-note">
+                    Recorded sales revenue
+                </div>
+            </div>
+
+
+            <div class="card">
+                <div class="card-label">
+                    Items Sold
+                </div>
+
+                <div class="card-value">
+                    {{ total_items_sold|default(0) }}
+                </div>
+
+                <div class="card-note">
+                    Total units sold
+                </div>
+            </div>
+
+
+            <div class="card">
+                <div class="card-label">
+                    Low Stock Products
+                </div>
+
+                <div class="card-value">
+                    {{ low_stock|length if low_stock else 0 }}
+                </div>
+
+                <div class="card-note">
+                    Products needing attention
+                </div>
+            </div>
+
+
+            <div class="card">
+                <div class="card-label">
+                    Report Status
+                </div>
+
+                <div class="card-value">
+                    Active
+                </div>
+
+                <div class="card-note">
+                    Live database report
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- ================= CATEGORY + LOW STOCK ================= -->
+
+        <section class="report-grid">
+
+
+            <!-- CATEGORY REPORT -->
+
+            <div class="section-card">
+
+                <div class="section-title">
+
+                    <div>
+                        <h2>Category Overview</h2>
+                        <p>Products grouped by category</p>
+                    </div>
+
+                </div>
+
+
+                {% if categories %}
+
+                    {% for item in categories %}
+
+                        <div class="category-row">
+
+                            <div class="category-top">
+
+                                <span>
+                                    {% if item is mapping %}
+                                        {{ item.get('name', item.get('category', 'Unknown')) }}
+                                    {% else %}
+                                        {{ item }}
+                                    {% endif %}
+                                </span>
+
+                                <span>
+                                    {% if item is mapping %}
+                                        {{ item.get('count', 0) }}
+                                    {% else %}
+                                        —
+                                    {% endif %}
+                                </span>
+
+                            </div>
+
+                            <div class="bar">
+
+                                <div
+                                    class="bar-fill"
+                                    style="width: 50%;">
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    {% endfor %}
+
+                {% else %}
+
+                    <div class="empty">
+                        No category data available.
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+
+            <!-- LOW STOCK REPORT -->
+
+            <div class="section-card">
+
+                <div class="section-title">
+
+                    <div>
+                        <h2>Low Stock Alert</h2>
+                        <p>Products that need restocking</p>
+                    </div>
+
+                </div>
+
+
+                {% if low_stock %}
+
+                    {% for product in low_stock %}
+
+                        <div class="stock-item">
+
+                            <div>
+
+                                <div class="stock-name">
+                                    {{ product['name'] if product is mapping else product }}
+                                </div>
+
+                                {% if product is mapping %}
+                                    <div class="stock-category">
+                                        {{ product.get('category', 'Product') }}
+                                    </div>
+                                {% endif %}
+
+                            </div>
+
+                            <div class="stock-number">
+
+                                {% if product is mapping %}
+                                    {{ product.get('quantity', product.get('stock', 0)) }}
+                                {% else %}
+                                    Low
+                                {% endif %}
+
+                            </div>
+
+                        </div>
+
+                    {% endfor %}
+
+                {% else %}
+
+                    <div class="empty">
+                        No low-stock products right now.
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= RECENT SALES ================= -->
+
+        <section class="full-card">
+
+            <div class="section-title">
+
+                <div>
+                    <h2>Recent Sales</h2>
+                    <p>Latest recorded transactions</p>
+                </div>
+
+                <a href="/sales-history" class="btn btn-orange">
+                    View History
+                </a>
+
+            </div>
+
+
+            <div class="table-wrap">
+
+                {% if recent_sales %}
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>#</th>
+                            <th>Product</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                            <th>Status</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {% for sale in recent_sales %}
+
+                        <tr>
+
+                            <td>
+                                {{ loop.index }}
+                            </td>
+
+                            <td>
+                                {% if sale is mapping %}
+                                    {{ sale.get('product_name', sale.get('name', 'Sale')) }}
+                                {% else %}
+                                    {{ sale }}
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                {% if sale is mapping %}
+                                    {{ sale.get('quantity', sale.get('qty', 0)) }}
+                                {% else %}
+                                    —
+                                {% endif %}
+                            </td>
+
+                            <td class="amount">
+
+                                {% if sale is mapping %}
+
+                                    ₹{{ "%.2f"|format(
+                                        sale.get(
+                                            'total',
+                                            sale.get('total_amount', 0)
+                                        )|float
+                                    ) }}
+
+                                {% else %}
+
+                                    ₹0.00
+
+                                {% endif %}
+
+                            </td>
+
+                            <td>
+                                <span class="badge">
+                                    Recorded
+                                </span>
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+                {% else %}
+
+                    <div class="empty">
+                        No sales transactions recorded yet.
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= QUICK REPORTS ================= -->
+
+        <section class="full-card">
+
+            <div class="section-title">
+
+                <div>
+                    <h2>Quick Reports</h2>
+                    <p>Useful management shortcuts</p>
+                </div>
+
+            </div>
+
+
+            <div class="quick-grid">
+
+                <a href="/products" class="quick-box">
+
+                    <h3>Inventory Report</h3>
+
+                    <p>
+                        View all products, current stock,
+                        prices and stock status.
+                    </p>
+
+                </a>
+
+
+                <a href="/sales-history" class="quick-box">
+
+                    <h3>Sales History</h3>
+
+                    <p>
+                        Check recorded sales transactions
+                        and previous business activity.
+                    </p>
+
+                </a>
+
+
+                <a href="/add-product" class="quick-box">
+
+                    <h3>Add New Product</h3>
+
+                    <p>
+                        Add a new steel product to the
+                        National Steel inventory.
+                    </p>
+
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= FOOTER ================= -->
+
+        <div class="footer">
+            National Steel • Owner Management System • Reports
+        </div>
+
+    </main>
+
+</div>
+
+</body>
+</html>

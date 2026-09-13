@@ -1,0 +1,2626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>National Steel | Sales History</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='background.css') }}">
+
+<style>
+
+:root{
+    --bg:#f3f6fa;
+    --white:#ffffff;
+    --dark:#101827;
+    --dark2:#182235;
+    --dark3:#26364a;
+    --text:#172033;
+    --text2:#334155;
+    --muted:#64748b;
+    --light:#94a3b8;
+    --line:#e5eaf0;
+    --line2:#eef2f6;
+    --soft:#f8fafc;
+    --gold:#f59e0b;
+    --gold2:#fbbf24;
+    --gold-dark:#b45309;
+    --green:#16a34a;
+    --green-soft:#f0fdf4;
+    --red:#dc2626;
+    --red-soft:#fef2f2;
+    --blue:#2563eb;
+    --blue-soft:#eff6ff;
+    --purple:#7c3aed;
+    --purple-soft:#f5f3ff;
+    --orange:#ea580c;
+    --orange-soft:#fff7ed;
+    --shadow:0 12px 35px rgba(15,23,42,.055);
+    --shadow2:0 5px 18px rgba(15,23,42,.035);
+    --radius:18px;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    min-height:100vh;
+    background:var(--bg);
+    color:var(--text);
+    font-family:Inter,Segoe UI,Arial,Helvetica,sans-serif;
+}
+
+a{
+    color:inherit;
+    text-decoration:none;
+}
+
+button,
+input,
+select{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+.layout{
+    display:flex;
+    min-height:100vh;
+}
+
+.sidebar{
+    position:fixed;
+    top:0;
+    left:0;
+    bottom:0;
+    width:270px;
+    z-index:100;
+    overflow-y:auto;
+    padding:23px 17px;
+    color:#fff;
+    background:
+        radial-gradient(circle at 18% 7%,rgba(245,158,11,.10),transparent 24%),
+        radial-gradient(circle at 90% 80%,rgba(37,99,235,.07),transparent 25%),
+        linear-gradient(180deg,#0b1321 0%,#111827 50%,#182235 100%);
+    border-right:1px solid rgba(255,255,255,.055);
+}
+
+.sidebar::-webkit-scrollbar{
+    width:5px;
+}
+
+.sidebar::-webkit-scrollbar-thumb{
+    background:rgba(255,255,255,.12);
+    border-radius:20px;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:5px 10px 22px;
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.logo{
+    width:49px;
+    height:49px;
+    object-fit:cover;
+    padding:3px;
+    border-radius:14px;
+    background:#fff;
+    box-shadow:0 8px 25px rgba(0,0,0,.25);
+}
+
+.brand h1{
+    color:#fff;
+    font-size:19px;
+    font-weight:800;
+    line-height:1.1;
+    letter-spacing:.3px;
+}
+
+.brand p{
+    margin-top:5px;
+    color:#8996aa;
+    font-size:9px;
+    letter-spacing:.3px;
+}
+
+.nav{
+    margin-top:23px;
+}
+
+.nav-title{
+    padding:0 12px 9px;
+    color:#718096;
+    font-size:9px;
+    letter-spacing:1.7px;
+    font-weight:800;
+    text-transform:uppercase;
+}
+
+.nav a{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:5px;
+    padding:12px 13px;
+    border-radius:11px;
+    color:#cbd5e1;
+    font-size:13px;
+    font-weight:600;
+    transition:background .2s ease,transform .2s ease,color .2s ease;
+}
+
+.nav a:hover{
+    color:#fff;
+    background:rgba(255,255,255,.065);
+    transform:translateX(2px);
+}
+
+.nav a.active{
+    color:#fff;
+    background:linear-gradient(90deg,rgba(245,158,11,.18),rgba(255,255,255,.055));
+    border-left:3px solid var(--gold);
+    padding-left:10px;
+}
+
+.nav-icon{
+    width:21px;
+    min-width:21px;
+    text-align:center;
+    font-size:16px;
+}
+
+.owner-box{
+    margin-top:28px;
+    padding:14px;
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:14px;
+    background:rgba(255,255,255,.035);
+}
+
+.owner-box small{
+    display:block;
+    color:#748198;
+    font-size:8px;
+    letter-spacing:1.3px;
+    font-weight:800;
+}
+
+.owner-box strong{
+    display:block;
+    margin-top:6px;
+    color:#fff;
+    font-size:13px;
+}
+
+.logout{
+    display:block;
+    margin-top:12px;
+    padding:9px 10px;
+    border-radius:9px;
+    color:#fecaca!important;
+    background:rgba(220,38,38,.13);
+    text-align:center;
+    font-size:10px!important;
+    font-weight:800!important;
+}
+
+.logout:hover{
+    background:rgba(220,38,38,.22)!important;
+}
+
+.main{
+    width:calc(100% - 270px);
+    min-height:100vh;
+    margin-left:270px;
+}
+
+.topbar{
+    position:sticky;
+    top:0;
+    z-index:50;
+    height:72px;
+    padding:0 34px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    background:rgba(255,255,255,.96);
+    border-bottom:1px solid var(--line);
+    backdrop-filter:blur(12px);
+}
+
+.breadcrumb{
+    color:var(--muted);
+    font-size:12px;
+}
+
+.breadcrumb strong{
+    color:var(--text);
+}
+
+.top-right{
+    display:flex;
+    align-items:center;
+    gap:9px;
+}
+
+.live{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    padding:8px 11px;
+    border-radius:20px;
+    color:#15803d;
+    background:var(--green-soft);
+    font-size:9px;
+    font-weight:900;
+    letter-spacing:.3px;
+}
+
+.live-dot{
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    background:#22c55e;
+    box-shadow:0 0 0 3px rgba(34,197,94,.10);
+}
+
+.owner-pill{
+    padding:8px 12px;
+    border-radius:20px;
+    color:#475569;
+    background:var(--soft);
+    font-size:9px;
+    font-weight:800;
+}
+
+.content{
+    padding:32px;
+}
+
+.hero{
+    position:relative;
+    overflow:hidden;
+    padding:31px 32px;
+    border-radius:24px;
+    color:#fff;
+    background:
+        radial-gradient(circle at 90% 15%,rgba(245,158,11,.27),transparent 27%),
+        radial-gradient(circle at 52% 120%,rgba(37,99,235,.19),transparent 35%),
+        linear-gradient(135deg,#101827 0%,#26364a 100%);
+    box-shadow:var(--shadow);
+}
+
+.hero:before{
+    content:"";
+    position:absolute;
+    width:260px;
+    height:260px;
+    right:-85px;
+    top:-125px;
+    border:1px solid rgba(255,255,255,.07);
+    border-radius:50%;
+}
+
+.hero:after{
+    content:"";
+    position:absolute;
+    width:150px;
+    height:150px;
+    right:90px;
+    bottom:-100px;
+    border:1px solid rgba(255,255,255,.045);
+    border-radius:50%;
+}
+
+.hero-tag{
+    position:relative;
+    z-index:2;
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    padding:7px 11px;
+    border-radius:20px;
+    color:#fbbf24;
+    background:rgba(245,158,11,.13);
+    font-size:9px;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    font-weight:900;
+}
+
+.hero h2{
+    position:relative;
+    z-index:2;
+    margin-top:13px;
+    color:#fff;
+    font-size:31px;
+    line-height:1.15;
+    letter-spacing:-.7px;
+}
+
+.hero p{
+    position:relative;
+    z-index:2;
+    max-width:780px;
+    margin-top:10px;
+    color:#cbd5e1;
+    font-size:12px;
+    line-height:1.75;
+}
+
+.hero-actions{
+    position:relative;
+    z-index:3;
+    display:flex;
+    flex-wrap:wrap;
+    gap:9px;
+    margin-top:21px;
+}
+
+.hero-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    padding:11px 15px;
+    border-radius:10px;
+    font-size:10px;
+    font-weight:900;
+    transition:.2s ease;
+}
+
+.hero-btn:hover{
+    transform:translateY(-1px);
+}
+
+.hero-btn.primary{
+    color:#111827;
+    background:var(--gold);
+    box-shadow:0 6px 18px rgba(245,158,11,.18);
+}
+
+.hero-btn.secondary{
+    color:#fff;
+    background:rgba(255,255,255,.09);
+    border:1px solid rgba(255,255,255,.08);
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+    margin-top:20px;
+}
+
+.stat{
+    position:relative;
+    overflow:hidden;
+    padding:20px;
+    border:1px solid var(--line);
+    border-radius:18px;
+    background:#fff;
+    box-shadow:var(--shadow2);
+}
+
+.stat:after{
+    content:"";
+    position:absolute;
+    width:75px;
+    height:75px;
+    right:-35px;
+    bottom:-35px;
+    border-radius:50%;
+    background:#f8fafc;
+}
+
+.stat-head{
+    position:relative;
+    z-index:2;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.stat-head span{
+    color:var(--muted);
+    font-size:9px;
+    text-transform:uppercase;
+    letter-spacing:.7px;
+    font-weight:800;
+}
+
+.stat-icon{
+    width:38px;
+    height:38px;
+    display:grid;
+    place-items:center;
+    border-radius:11px;
+    background:#f8fafc;
+    font-size:15px;
+    position:relative;
+    z-index:3;
+}
+
+.stat h3{
+    position:relative;
+    z-index:2;
+    margin-top:10px;
+    color:var(--text);
+    font-size:24px;
+    line-height:1.2;
+    letter-spacing:-.5px;
+}
+
+.stat p{
+    position:relative;
+    z-index:2;
+    margin-top:5px;
+    color:#94a3b8;
+    font-size:9px;
+}
+
+.section-head{
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+    gap:15px;
+    margin:29px 0 13px;
+}
+
+.section-head h3{
+    color:var(--text);
+    font-size:19px;
+    line-height:1.2;
+}
+
+.section-head p{
+    margin-top:5px;
+    color:var(--muted);
+    font-size:10px;
+}
+
+.section-actions{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+}
+
+.outline-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    padding:9px 12px;
+    border:1px solid var(--line);
+    border-radius:9px;
+    background:#fff;
+    color:#475569;
+    font-size:9px;
+    font-weight:900;
+    transition:.2s ease;
+}
+
+.outline-btn:hover{
+    background:#f8fafc;
+    border-color:#d8dee7;
+}
+
+.filter-card{
+    padding:15px;
+    border:1px solid var(--line);
+    border-radius:17px;
+    background:#fff;
+    box-shadow:var(--shadow2);
+}
+
+.filter-grid{
+    display:grid;
+    grid-template-columns:1.6fr 1fr 1fr auto;
+    gap:10px;
+}
+
+.field{
+    position:relative;
+}
+
+.field input,
+.field select{
+    width:100%;
+    min-height:42px;
+    padding:10px 12px;
+    outline:none;
+    border:1px solid var(--line);
+    border-radius:10px;
+    background:#f8fafc;
+    color:#334155;
+    font-size:10px;
+    transition:.2s ease;
+}
+
+.field input:focus,
+.field select:focus{
+    border-color:#cbd5e1;
+    background:#fff;
+    box-shadow:0 0 0 3px rgba(37,99,235,.04);
+}
+
+.search-field input{
+    padding-left:37px;
+}
+
+.search-icon{
+    position:absolute;
+    left:13px;
+    top:12px;
+    color:#94a3b8;
+    font-size:13px;
+    pointer-events:none;
+}
+
+.filter-btn{
+    min-height:42px;
+    padding:0 16px;
+    border:0;
+    border-radius:10px;
+    background:var(--dark);
+    color:#fff;
+    font-size:10px;
+    font-weight:900;
+    transition:.2s ease;
+}
+
+.filter-btn:hover{
+    background:#1f2937;
+    transform:translateY(-1px);
+}
+
+.filter-note{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    margin-top:10px;
+    padding:9px 11px;
+    border-radius:9px;
+    color:#64748b;
+    background:#f8fafc;
+    font-size:9px;
+}
+
+.filter-note strong{
+    color:#334155;
+}
+
+.summary-strip{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+    margin-top:14px;
+}
+
+.summary{
+    padding:14px 16px;
+    border:1px solid var(--line);
+    border-radius:13px;
+    background:#fff;
+    box-shadow:var(--shadow2);
+}
+
+.summary-label{
+    color:#94a3b8;
+    font-size:8px;
+    text-transform:uppercase;
+    letter-spacing:.8px;
+    font-weight:900;
+}
+
+.summary-value{
+    margin-top:6px;
+    color:var(--text);
+    font-size:18px;
+    font-weight:900;
+}
+
+.summary-note{
+    margin-top:3px;
+    color:#94a3b8;
+    font-size:8px;
+}
+
+.table-card{
+    overflow:hidden;
+    border:1px solid var(--line);
+    border-radius:19px;
+    background:#fff;
+    box-shadow:var(--shadow2);
+}
+
+.table-top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+    padding:16px 18px;
+    border-bottom:1px solid var(--line);
+}
+
+.table-top-left strong{
+    display:block;
+    color:var(--text);
+    font-size:13px;
+}
+
+.table-top-left span{
+    display:block;
+    margin-top:4px;
+    color:#94a3b8;
+    font-size:9px;
+}
+
+.record-count{
+    padding:7px 10px;
+    border-radius:20px;
+    color:#475569;
+    background:#f8fafc;
+    font-size:9px;
+    font-weight:900;
+    white-space:nowrap;
+}
+
+.table-wrap{
+    width:100%;
+    overflow-x:auto;
+}
+
+.table-wrap::-webkit-scrollbar{
+    height:7px;
+}
+
+.table-wrap::-webkit-scrollbar-track{
+    background:#f8fafc;
+}
+
+.table-wrap::-webkit-scrollbar-thumb{
+    background:#d7dde5;
+    border-radius:20px;
+}
+
+table{
+    width:100%;
+    min-width:980px;
+    border-collapse:collapse;
+}
+
+thead{
+    background:#f8fafc;
+}
+
+th{
+    padding:13px 17px;
+    text-align:left;
+    border-bottom:1px solid var(--line);
+    color:#64748b;
+    font-size:8px;
+    letter-spacing:.8px;
+    text-transform:uppercase;
+    white-space:nowrap;
+    font-weight:900;
+}
+
+td{
+    padding:14px 17px;
+    border-bottom:1px solid #eef1f5;
+    color:#334155;
+    font-size:10px;
+    vertical-align:middle;
+}
+
+tbody tr{
+    transition:.15s ease;
+}
+
+tbody tr:hover{
+    background:#fafbfc;
+}
+
+tbody tr:last-child td{
+    border-bottom:0;
+}
+
+.sale-number{
+    width:30px;
+    height:30px;
+    display:grid;
+    place-items:center;
+    border-radius:9px;
+    background:#f8fafc;
+    color:#64748b;
+    font-size:9px;
+    font-weight:900;
+}
+
+.product-cell{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    min-width:210px;
+}
+
+.product-avatar{
+    width:37px;
+    height:37px;
+    min-width:37px;
+    display:grid;
+    place-items:center;
+    border-radius:10px;
+    color:#a16207;
+    background:#fff7e6;
+    font-size:14px;
+}
+
+.product-title{
+    color:#172033;
+    font-size:10px;
+    font-weight:900;
+}
+
+.product-sub{
+    margin-top:3px;
+    color:#94a3b8;
+    font-size:8px;
+}
+
+.category{
+    display:inline-flex;
+    align-items:center;
+    padding:5px 8px;
+    border-radius:20px;
+    font-size:8px;
+    font-weight:900;
+    white-space:nowrap;
+}
+
+.category.pipe{
+    color:#1d4ed8;
+    background:#eff6ff;
+}
+
+.category.angle{
+    color:#c2410c;
+    background:#fff7ed;
+}
+
+.category.channel{
+    color:#7c3aed;
+    background:#f5f3ff;
+}
+
+.category.sheet{
+    color:#047857;
+    background:#ecfdf5;
+}
+
+.category.other{
+    color:#475569;
+    background:#f1f5f9;
+}
+
+.quantity{
+    color:#172033;
+    font-size:11px;
+    font-weight:900;
+}
+
+.quantity small{
+    margin-left:3px;
+    color:#94a3b8;
+    font-size:8px;
+    font-weight:700;
+}
+
+.amount{
+    color:#172033;
+    font-size:11px;
+    font-weight:900;
+}
+
+.date{
+    color:#475569;
+    font-size:10px;
+    font-weight:800;
+}
+
+.time{
+    margin-top:3px;
+    color:#94a3b8;
+    font-size:8px;
+}
+
+.status{
+    display:inline-flex;
+    align-items:center;
+    gap:5px;
+    padding:6px 9px;
+    border-radius:20px;
+    color:#15803d;
+    background:#f0fdf4;
+    font-size:8px;
+    font-weight:900;
+    white-space:nowrap;
+}
+
+.status-dot{
+    width:5px;
+    height:5px;
+    border-radius:50%;
+    background:#22c55e;
+}
+
+.customer-name{
+    color:#334155;
+    font-size:10px;
+    font-weight:800;
+}
+
+.customer-note{
+    margin-top:3px;
+    color:#94a3b8;
+    font-size:8px;
+}
+
+.empty{
+    padding:65px 25px;
+    text-align:center;
+}
+
+.empty-icon{
+    width:68px;
+    height:68px;
+    display:grid;
+    place-items:center;
+    margin:0 auto 15px;
+    border-radius:20px;
+    background:#f8fafc;
+    font-size:29px;
+}
+
+.empty h4{
+    color:var(--text);
+    font-size:17px;
+}
+
+.empty p{
+    max-width:460px;
+    margin:7px auto 0;
+    color:var(--muted);
+    font-size:10px;
+    line-height:1.7;
+}
+
+.empty-btn{
+    display:inline-flex;
+    margin-top:17px;
+    padding:10px 14px;
+    border-radius:9px;
+    color:#111827;
+    background:var(--gold);
+    font-size:9px;
+    font-weight:900;
+}
+
+.lower-grid{
+    display:grid;
+    grid-template-columns:1.15fr .85fr;
+    gap:16px;
+    margin-top:18px;
+}
+
+.card{
+    padding:21px;
+    border:1px solid var(--line);
+    border-radius:18px;
+    background:#fff;
+    box-shadow:var(--shadow2);
+}
+
+.card h4{
+    color:var(--text);
+    font-size:15px;
+}
+
+.card-sub{
+    margin-top:4px;
+    color:#94a3b8;
+    font-size:9px;
+}
+
+.insight-list{
+    display:grid;
+    gap:9px;
+    margin-top:15px;
+}
+
+.insight{
+    display:flex;
+    align-items:center;
+    gap:11px;
+    padding:11px;
+    border-radius:11px;
+    background:#f8fafc;
+}
+
+.insight-icon{
+    width:32px;
+    height:32px;
+    min-width:32px;
+    display:grid;
+    place-items:center;
+    border-radius:9px;
+    background:#fff;
+    font-size:14px;
+}
+
+.insight strong{
+    display:block;
+    color:#334155;
+    font-size:10px;
+}
+
+.insight span{
+    display:block;
+    margin-top:3px;
+    color:#94a3b8;
+    font-size:8px;
+}
+
+.help-list{
+    display:grid;
+    gap:8px;
+    margin-top:14px;
+}
+
+.help-item{
+    display:flex;
+    gap:9px;
+    padding:10px 0;
+    border-bottom:1px solid #eef1f5;
+    color:#64748b;
+    font-size:9px;
+    line-height:1.5;
+}
+
+.help-item:last-child{
+    border-bottom:0;
+}
+
+.help-check{
+    color:var(--green);
+    font-weight:900;
+}
+
+.footer{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+    margin-top:25px;
+    padding:17px 2px 5px;
+    color:#94a3b8;
+    font-size:8px;
+}
+
+.footer strong{
+    color:#64748b;
+}
+
+.hidden-row{
+    display:none !important;
+}
+
+@media(max-width:1120px){
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .filter-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .filter-btn{
+        width:100%;
+    }
+
+}
+
+@media(max-width:900px){
+
+    .sidebar{
+        width:225px;
+    }
+
+    .main{
+        width:calc(100% - 225px);
+        margin-left:225px;
+    }
+
+    .content{
+        padding:22px;
+    }
+
+    .lower-grid{
+        grid-template-columns:1fr;
+    }
+
+}
+
+@media(max-width:680px){
+
+    .layout{
+        display:block;
+    }
+
+    .sidebar{
+        position:relative;
+        width:100%;
+        min-height:auto;
+    }
+
+    .main{
+        width:100%;
+        margin-left:0;
+    }
+
+    .topbar{
+        height:65px;
+        padding:0 16px;
+    }
+
+    .content{
+        padding:15px;
+    }
+
+    .stats{
+        grid-template-columns:1fr;
+    }
+
+    .summary-strip{
+        grid-template-columns:1fr;
+    }
+
+    .filter-grid{
+        grid-template-columns:1fr;
+    }
+
+    .hero{
+        padding:24px;
+    }
+
+    .hero h2{
+        font-size:25px;
+    }
+
+    .hero p{
+        font-size:11px;
+    }
+
+    .top-right .owner-pill{
+        display:none;
+    }
+
+    .section-head{
+        align-items:flex-start;
+        flex-direction:column;
+    }
+
+    .section-actions{
+        width:100%;
+    }
+
+    .outline-btn{
+        flex:1;
+        justify-content:center;
+    }
+
+    .table-top{
+        align-items:flex-start;
+        flex-direction:column;
+    }
+
+    .record-count{
+        align-self:flex-start;
+    }
+
+}
+
+@media print{
+
+    @page{
+        size:A4 landscape;
+        margin:10mm;
+    }
+
+    body{
+        background:#fff;
+    }
+
+    .sidebar,
+    .topbar,
+    .hero-actions,
+    .filter-card,
+    .section-actions,
+    .lower-grid,
+    .footer{
+        display:none !important;
+    }
+
+    .main{
+        width:100%;
+        margin:0;
+    }
+
+    .content{
+        padding:0;
+    }
+
+    .hero{
+        box-shadow:none;
+        border-radius:0;
+        padding:20px;
+        -webkit-print-color-adjust:exact;
+        print-color-adjust:exact;
+    }
+
+    .stats{
+        margin-top:12px;
+    }
+
+    .stat{
+        box-shadow:none;
+    }
+
+    .table-card{
+        margin-top:15px;
+        box-shadow:none;
+        border-radius:0;
+    }
+
+    .table-wrap{
+        overflow:visible;
+    }
+
+    table{
+        min-width:0;
+        width:100%;
+    }
+
+    th,
+    td{
+        padding:8px;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="layout">
+
+<aside class="sidebar">
+
+    <div class="brand">
+
+        <img
+            class="logo"
+            src="{{ url_for('static', filename='logo.jpg.jpeg') }}"
+            alt="National Steel Logo"
+        >
+
+        <div>
+
+            <h1>National Steel</h1>
+
+            <p>
+                Owner Management System
+            </p>
+
+        </div>
+
+    </div>
+
+    <nav class="nav">
+
+        <div class="nav-title">
+            Main Menu
+        </div>
+
+        <a href="{{ url_for('owner_dashboard') }}">
+            <span class="nav-icon">⌂</span>
+            Dashboard
+        </a>
+
+        <a href="{{ url_for('products') }}">
+            <span class="nav-icon">▦</span>
+            Products
+        </a>
+
+        <a href="{{ url_for('add_product') }}">
+            <span class="nav-icon">＋</span>
+            Add Product
+        </a>
+
+        <a href="{{ url_for('sales') }}">
+            <span class="nav-icon">₹</span>
+            Sales
+        </a>
+
+        <a href="{{ url_for('sales_history') }}" class="active">
+            <span class="nav-icon">◷</span>
+            Sales History
+        </a>
+
+        <div class="nav-title" style="margin-top:22px">
+            Management
+        </div>
+
+        <a href="{{ url_for('reports') }}">
+            <span class="nav-icon">▤</span>
+            Reports
+        </a>
+
+        <a href="{{ url_for('about') }}">
+            <span class="nav-icon">ⓘ</span>
+            About
+        </a>
+
+    </nav>
+
+    <div class="owner-box">
+
+        <small>
+            LOGGED IN AS
+        </small>
+
+        <strong>
+            Rizwan • Owner
+        </strong>
+
+        <a class="logout" href="{{ url_for('owner_logout') }}">
+            Logout
+        </a>
+
+    </div>
+
+</aside>
+
+<main class="main">
+
+    <header class="topbar">
+
+        <div class="breadcrumb">
+            National Steel /
+            <strong>Sales History</strong>
+        </div>
+
+        <div class="top-right">
+
+            <div class="live">
+                <span class="live-dot"></span>
+                SALES ACTIVE
+            </div>
+
+            <div class="owner-pill">
+                Owner: Rizwan
+            </div>
+
+        </div>
+
+    </header>
+
+    <section class="content">
+
+        <div class="hero">
+
+            <span class="hero-tag">
+                ◷ Transaction Archive
+            </span>
+
+            <h2>
+                Sales History
+            </h2>
+
+            <p>
+                View every recorded National Steel sale
+                in one professional transaction history.
+                Search products, review quantities,
+                check revenue and keep your sales records
+                organized.
+            </p>
+
+            <div class="hero-actions">
+
+                <a
+                    class="hero-btn primary"
+                    href="{{ url_for('sales') }}"
+                >
+                    ＋ Record New Sale
+                </a>
+
+                <button
+                    class="hero-btn secondary"
+                    type="button"
+                    onclick="window.print()"
+                >
+                    🖨 Print History
+                </button>
+
+            </div>
+
+        </div>
+
+        <div class="stats">
+
+            <div class="stat">
+
+                <div class="stat-head">
+                    <span>Total Sales</span>
+                    <div class="stat-icon">₹</div>
+                </div>
+
+                <h3>
+
+                    ₹
+
+                    {% if total_sales is defined %}
+
+                        {{ "%.2f"|format(total_sales or 0) }}
+
+                    {% else %}
+
+                        {% set ns = namespace(total=0) %}
+
+                        {% for sale in sales_history|default([]) %}
+
+                            {% if sale['total'] is defined %}
+
+                                {% set ns.total = ns.total + (sale['total'] or 0) %}
+
+                            {% endif %}
+
+                        {% endfor %}
+
+                        {{ "%.2f"|format(ns.total) }}
+
+                    {% endif %}
+
+                </h3>
+
+                <p>
+                    Recorded sales revenue
+                </p>
+
+            </div>
+
+            <div class="stat">
+
+                <div class="stat-head">
+                    <span>Transactions</span>
+                    <div class="stat-icon">▤</div>
+                </div>
+
+                <h3>
+
+                    {% if total_sale_entries is defined %}
+
+                        {{ total_sale_entries }}
+
+                    {% elif sales_history is defined %}
+
+                        {{ sales_history|length }}
+
+                    {% else %}
+
+                        0
+
+                    {% endif %}
+
+                </h3>
+
+                <p>
+                    Completed sale entries
+                </p>
+
+            </div>
+
+            <div class="stat">
+
+                <div class="stat-head">
+                    <span>Units Sold</span>
+                    <div class="stat-icon">📦</div>
+                </div>
+
+                <h3>
+
+                    {% set unit_ns = namespace(total=0) %}
+
+                    {% for sale in sales_history|default([]) %}
+
+                        {% if sale['quantity'] is defined %}
+
+                            {% set unit_ns.total =
+                                unit_ns.total +
+                                (sale['quantity'] or 0)
+                            %}
+
+                        {% endif %}
+
+                    {% endfor %}
+
+                    {{ unit_ns.total }}
+
+                </h3>
+
+                <p>
+                    Total quantity sold
+                </p>
+
+            </div>
+
+            <div class="stat">
+
+                <div class="stat-head">
+                    <span>Average Sale</span>
+                    <div class="stat-icon">↗</div>
+                </div>
+
+                <h3>
+
+                    ₹
+
+                    {% set avg_ns = namespace(total=0) %}
+
+                    {% for sale in sales_history|default([]) %}
+
+                        {% if sale['total'] is defined %}
+
+                            {% set avg_ns.total =
+                                avg_ns.total +
+                                (sale['total'] or 0)
+                            %}
+
+                        {% endif %}
+
+                    {% endfor %}
+
+                    {% if sales_history is defined and sales_history|length > 0 %}
+
+                        {{ "%.2f"|format(
+                            avg_ns.total /
+                            (sales_history|length)
+                        ) }}
+
+                    {% else %}
+
+                        0.00
+
+                    {% endif %}
+
+                </h3>
+
+                <p>
+                    Average transaction value
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="section-head">
+
+            <div>
+
+                <h3>
+                    Transaction Records
+                </h3>
+
+                <p>
+                    Search and review all recorded sales.
+                </p>
+
+            </div>
+
+            <div class="section-actions">
+
+                <button
+                    class="outline-btn"
+                    type="button"
+                    onclick="clearFilters()"
+                >
+                    ↻ Reset Filters
+                </button>
+
+                <button
+                    class="outline-btn"
+                    type="button"
+                    onclick="window.print()"
+                >
+                    🖨 Print
+                </button>
+
+            </div>
+
+        </div>
+
+        <div class="filter-card">
+
+            <div class="filter-grid">
+
+                <div class="field search-field">
+
+                    <span class="search-icon">
+                        🔎
+                    </span>
+
+                    <input
+                        type="text"
+                        id="salesSearch"
+                        placeholder="Search product, customer or transaction..."
+                        onkeyup="filterSales()"
+                    >
+
+                </div>
+
+                <div class="field">
+
+                    <select
+                        id="categoryFilter"
+                        onchange="filterSales()"
+                    >
+
+                        <option value="">
+                            All Categories
+                        </option>
+
+                        <option value="pipe">
+                            Pipe
+                        </option>
+
+                        <option value="angle">
+                            Angle
+                        </option>
+
+                        <option value="channel">
+                            Channel
+                        </option>
+
+                        <option value="sheet">
+                            Sheet
+                        </option>
+
+                        <option value="other">
+                            Other
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <div class="field">
+
+                    <select
+                        id="sortFilter"
+                        onchange="sortSales()"
+                    >
+
+                        <option value="newest">
+                            Newest First
+                        </option>
+
+                        <option value="oldest">
+                            Oldest First
+                        </option>
+
+                        <option value="high">
+                            Highest Amount
+                        </option>
+
+                        <option value="low">
+                            Lowest Amount
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <button
+                    class="filter-btn"
+                    type="button"
+                    onclick="filterSales()"
+                >
+                    Apply Filter
+                </button>
+
+            </div>
+
+            <div class="filter-note">
+
+                <span>💡</span>
+
+                <span>
+                    <strong>Tip:</strong>
+                    Search works instantly while you type.
+                </span>
+
+            </div>
+
+        </div>
+
+        <div class="summary-strip">
+
+            <div class="summary">
+
+                <div class="summary-label">
+                    Visible Records
+                </div>
+
+                <div
+                    class="summary-value"
+                    id="visibleRecords"
+                >
+
+                    {% if sales_history is defined %}
+
+                        {{ sales_history|length }}
+
+                    {% else %}
+
+                        0
+
+                    {% endif %}
+
+                </div>
+
+                <div class="summary-note">
+                    Transactions currently shown
+                </div>
+
+            </div>
+
+            <div class="summary">
+
+                <div class="summary-label">
+                    Visible Units
+                </div>
+
+                <div
+                    class="summary-value"
+                    id="visibleUnits"
+                >
+
+                    {% set visible_ns = namespace(total=0) %}
+
+                    {% for sale in sales_history|default([]) %}
+
+                        {% if sale['quantity'] is defined %}
+
+                            {% set visible_ns.total =
+                                visible_ns.total +
+                                (sale['quantity'] or 0)
+                            %}
+
+                        {% endif %}
+
+                    {% endfor %}
+
+                    {{ visible_ns.total }}
+
+                </div>
+
+                <div class="summary-note">
+                    Quantity from visible records
+                </div>
+
+            </div>
+
+            <div class="summary">
+
+                <div class="summary-label">
+                    Visible Revenue
+                </div>
+
+                <div
+                    class="summary-value"
+                    id="visibleRevenue"
+                >
+
+                    {% set revenue_ns = namespace(total=0) %}
+
+                    {% for sale in sales_history|default([]) %}
+
+                        {% if sale['total'] is defined %}
+
+                            {% set revenue_ns.total =
+                                revenue_ns.total +
+                                (sale['total'] or 0)
+                            %}
+
+                        {% endif %}
+
+                    {% endfor %}
+
+                    ₹{{ "%.2f"|format(revenue_ns.total) }}
+
+                </div>
+
+                <div class="summary-note">
+                    Revenue from visible records
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="table-card" style="margin-top:14px">
+
+            <div class="table-top">
+
+                <div class="table-top-left">
+
+                    <strong>
+                        Sales Transaction History
+                    </strong>
+
+                    <span>
+                        Complete record of National Steel sales
+                    </span>
+
+                </div>
+
+                <div
+                    class="record-count"
+                    id="recordCount"
+                >
+
+                    {% if sales_history is defined %}
+
+                        {{ sales_history|length }}
+
+                    {% else %}
+
+                        0
+
+                    {% endif %}
+
+                    Records
+
+                </div>
+
+            </div>
+
+            {% if sales_history is defined and sales_history|length > 0 %}
+
+            <div class="table-wrap">
+
+                <table id="salesTable">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>#</th>
+                            <th>Product</th>
+                            <th>Category</th>
+                            <th>Quantity</th>
+                            <th>Amount</th>
+                            <th>Customer</th>
+                            <th>Date & Time</th>
+                            <th>Status</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="salesTableBody">
+
+                    {% for sale in sales_history %}
+
+                        <tr
+                            class="sale-row"
+
+                            data-product="{{
+                                sale['product_name']
+                                if sale['product_name'] is defined
+                                else
+                                sale['product']
+                                if sale['product'] is defined
+                                else
+                                'Product'
+                            }}"
+
+                            data-category="{{
+                                sale['category']
+                                if sale['category'] is defined
+                                else
+                                'other'
+                            }}"
+
+                            data-amount="{{
+                                sale['total']
+                                if sale['total'] is defined
+                                else
+                                0
+                            }}"
+
+                            data-quantity="{{
+                                sale['quantity']
+                                if sale['quantity'] is defined
+                                else
+                                0
+                            }}"
+
+                            data-date="{{
+                                sale['date']
+                                if sale['date'] is defined
+                                else
+                                sale['created_at']
+                                if sale['created_at'] is defined
+                                else
+                                ''
+                            }}"
+                        >
+
+                            <td>
+
+                                <div class="sale-number">
+                                    {{ loop.index }}
+                                </div>
+
+                            </td>
+
+                            <td>
+
+                                <div class="product-cell">
+
+                                    <div class="product-avatar">
+                                        ⚙
+                                    </div>
+
+                                    <div>
+
+                                        <div class="product-title">
+
+                                            {% if sale['product_name'] is defined %}
+
+                                                {{ sale['product_name'] }}
+
+                                            {% elif sale['product'] is defined %}
+
+                                                {{ sale['product'] }}
+
+                                            {% elif sale['name'] is defined %}
+
+                                                {{ sale['name'] }}
+
+                                            {% else %}
+
+                                                Steel Product
+
+                                            {% endif %}
+
+                                        </div>
+
+                                        <div class="product-sub">
+                                            Transaction #{{ loop.index }}
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+                            <td>
+
+                                {% set cat =
+                                    sale['category']
+                                    if sale['category'] is defined
+                                    else
+                                    'other'
+                                %}
+
+                                {% if cat %}
+
+                                    {% set cat_lower =
+                                        cat|string|lower
+                                    %}
+
+                                {% else %}
+
+                                    {% set cat_lower = 'other' %}
+
+                                {% endif %}
+
+                                <span
+                                    class="category
+                                    {% if 'pipe' in cat_lower %}
+                                        pipe
+                                    {% elif 'angle' in cat_lower %}
+                                        angle
+                                    {% elif 'channel' in cat_lower %}
+                                        channel
+                                    {% elif 'sheet' in cat_lower %}
+                                        sheet
+                                    {% else %}
+                                        other
+                                    {% endif %}
+                                    "
+                                >
+
+                                    {{ cat|capitalize }}
+
+                                </span>
+
+                            </td>
+
+                            <td>
+
+                                <span class="quantity">
+
+                                    {% if sale['quantity'] is defined %}
+
+                                        {{ sale['quantity'] }}
+
+                                    {% else %}
+
+                                        0
+
+                                    {% endif %}
+
+                                    <small>
+                                        units
+                                    </small>
+
+                                </span>
+
+                            </td>
+
+                            <td>
+
+                                <span class="amount">
+
+                                    ₹
+
+                                    {% if sale['total'] is defined %}
+
+                                        {{ "%.2f"|format(
+                                            sale['total'] or 0
+                                        ) }}
+
+                                    {% elif sale['amount'] is defined %}
+
+                                        {{ "%.2f"|format(
+                                            sale['amount'] or 0
+                                        ) }}
+
+                                    {% else %}
+
+                                        0.00
+
+                                    {% endif %}
+
+                                </span>
+
+                            </td>
+
+                            <td>
+
+                                <div class="customer-name">
+
+                                    {% if sale['customer_name'] is defined %}
+
+                                        {{ sale['customer_name'] }}
+
+                                    {% elif sale['customer'] is defined %}
+
+                                        {{ sale['customer'] }}
+
+                                    {% else %}
+
+                                        Walk-in Customer
+
+                                    {% endif %}
+
+                                </div>
+
+                                <div class="customer-note">
+                                    Sales Record
+                                </div>
+
+                            </td>
+
+                            <td>
+
+                                <div class="date">
+
+                                    {% if sale['date'] is defined %}
+
+                                        {{ sale['date'] }}
+
+                                    {% elif sale['sale_date'] is defined %}
+
+                                        {{ sale['sale_date'] }}
+
+                                    {% elif sale['created_at'] is defined %}
+
+                                        {{ sale['created_at'] }}
+
+                                    {% else %}
+
+                                        —
+
+                                    {% endif %}
+
+                                </div>
+
+                                {% if sale['time'] is defined %}
+
+                                    <div class="time">
+                                        {{ sale['time'] }}
+                                    </div>
+
+                                {% endif %}
+
+                            </td>
+
+                            <td>
+
+                                <span class="status">
+
+                                    <span class="status-dot"></span>
+
+                                    Completed
+
+                                </span>
+
+                            </td>
+
+                        </tr>
+
+                    {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            {% else %}
+
+            <div class="empty">
+
+                <div class="empty-icon">
+                    🧾
+                </div>
+
+                <h4>
+                    No Sales Recorded Yet
+                </h4>
+
+                <p>
+                    Your sales transaction history will
+                    appear here after you record your first
+                    National Steel sale.
+                </p>
+
+                <a
+                    class="empty-btn"
+                    href="{{ url_for('sales') }}"
+                >
+                    ＋ Record First Sale
+                </a>
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+        <div class="lower-grid">
+
+            <div class="card">
+
+                <h4>
+                    Sales Insights
+                </h4>
+
+                <div class="card-sub">
+                    Quick information from your transaction records.
+                </div>
+
+                <div class="insight-list">
+
+                    <div class="insight">
+
+                        <div class="insight-icon">
+                            💰
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Revenue Tracking
+                            </strong>
+
+                            <span>
+                                Every completed sale is included
+                                in your recorded revenue.
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    <div class="insight">
+
+                        <div class="insight-icon">
+                            📦
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Inventory Movement
+                            </strong>
+
+                            <span>
+                                Recorded quantities help track
+                                products sold from inventory.
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    <div class="insight">
+
+                        <div class="insight-icon">
+                            📊
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Business Overview
+                            </strong>
+
+                            <span>
+                                Use Sales History together with
+                                Reports for better business decisions.
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    <div class="insight">
+
+                        <div class="insight-icon">
+                            🔐
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Owner Only
+                            </strong>
+
+                            <span>
+                                This sales information belongs to
+                                the private owner management area.
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="card">
+
+                <h4>
+                    Sales History Guide
+                </h4>
+
+                <div class="card-sub">
+                    Useful tips for managing transaction records.
+                </div>
+
+                <div class="help-list">
+
+                    <div class="help-item">
+
+                        <span class="help-check">
+                            ✓
+                        </span>
+
+                        <span>
+                            Use the search box to quickly find
+                            a product or customer.
+                        </span>
+
+                    </div>
+
+                    <div class="help-item">
+
+                        <span class="help-check">
+                            ✓
+                        </span>
+
+                        <span>
+                            Use category filters to narrow down
+                            your sales records.
+                        </span>
+
+                    </div>
+
+                    <div class="help-item">
+
+                        <span class="help-check">
+                            ✓
+                        </span>
+
+                        <span>
+                            Use Print History when you need a
+                            physical sales record.
+                        </span>
+
+                    </div>
+
+                    <div class="help-item">
+
+                        <span class="help-check">
+                            ✓
+                        </span>
+
+                        <span>
+                            Record new transactions from the
+                            Sales section.
+                        </span>
+
+                    </div>
+
+                    <div class="help-item">
+
+                        <span class="help-check">
+                            ✓
+                        </span>
+
+                        <span>
+                            Keep transaction information accurate
+                            for reliable reports.
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="footer">
+
+            <div>
+
+                © 2026
+                <strong>
+                    National Steel
+                </strong>
+                • Owner Management System
+
+            </div>
+
+            <div>
+                Sales History
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+</div>
+
+<script>
+
+function filterSales(){
+
+    const searchInput =
+        document.getElementById("salesSearch");
+
+    const categoryInput =
+        document.getElementById("categoryFilter");
+
+    const search =
+        searchInput
+            ? searchInput.value.toLowerCase().trim()
+            : "";
+
+    const category =
+        categoryInput
+            ? categoryInput.value.toLowerCase().trim()
+            : "";
+
+    const rows =
+        document.querySelectorAll(".sale-row");
+
+    let visibleCount = 0;
+    let visibleUnits = 0;
+    let visibleRevenue = 0;
+
+    rows.forEach(function(row){
+
+        const product =
+            (row.dataset.product || "").toLowerCase();
+
+        const rowCategory =
+            (row.dataset.category || "other").toLowerCase();
+
+        const amount =
+            parseFloat(row.dataset.amount || "0") || 0;
+
+        const quantity =
+            parseFloat(row.dataset.quantity || "0") || 0;
+
+        const matchesSearch =
+            !search ||
+            product.includes(search) ||
+            row.textContent.toLowerCase().includes(search);
+
+        const matchesCategory =
+            !category ||
+            rowCategory.includes(category);
+
+        if(matchesSearch && matchesCategory){
+
+            row.classList.remove("hidden-row");
+
+            visibleCount++;
+            visibleUnits += quantity;
+            visibleRevenue += amount;
+
+        }else{
+
+            row.classList.add("hidden-row");
+
+        }
+
+    });
+
+    updateSummary(
+        visibleCount,
+        visibleUnits,
+        visibleRevenue
+    );
+
+}
+
+function updateSummary(count,units,revenue){
+
+    const visibleRecords =
+        document.getElementById("visibleRecords");
+
+    const visibleUnits =
+        document.getElementById("visibleUnits");
+
+    const visibleRevenue =
+        document.getElementById("visibleRevenue");
+
+    const recordCount =
+        document.getElementById("recordCount");
+
+    if(visibleRecords){
+        visibleRecords.textContent = count;
+    }
+
+    if(visibleUnits){
+        visibleUnits.textContent =
+            Number.isInteger(units)
+                ? units
+                : units.toFixed(2);
+    }
+
+    if(visibleRevenue){
+        visibleRevenue.textContent =
+            "₹" + revenue.toFixed(2);
+    }
+
+    if(recordCount){
+        recordCount.textContent =
+            count + " Records";
+    }
+
+}
+
+function clearFilters(){
+
+    const searchInput =
+        document.getElementById("salesSearch");
+
+    const categoryInput =
+        document.getElementById("categoryFilter");
+
+    const sortInput =
+        document.getElementById("sortFilter");
+
+    if(searchInput){
+        searchInput.value = "";
+    }
+
+    if(categoryInput){
+        categoryInput.value = "";
+    }
+
+    if(sortInput){
+        sortInput.value = "newest";
+    }
+
+    const rows =
+        document.querySelectorAll(".sale-row");
+
+    rows.forEach(function(row){
+        row.classList.remove("hidden-row");
+    });
+
+    sortSales();
+
+}
+
+function sortSales(){
+
+    const tableBody =
+        document.getElementById("salesTableBody");
+
+    const sortInput =
+        document.getElementById("sortFilter");
+
+    if(!tableBody || !sortInput){
+        return;
+    }
+
+    const sortType =
+        sortInput.value;
+
+    const rows =
+        Array.from(
+            tableBody.querySelectorAll(".sale-row")
+        );
+
+    rows.sort(function(a,b){
+
+        if(sortType === "high"){
+
+            return (
+                parseFloat(b.dataset.amount || "0") -
+                parseFloat(a.dataset.amount || "0")
+            );
+
+        }
+
+        if(sortType === "low"){
+
+            return (
+                parseFloat(a.dataset.amount || "0") -
+                parseFloat(b.dataset.amount || "0")
+            );
+
+        }
+
+        if(sortType === "oldest"){
+
+            return (
+                (a.dataset.date || "")
+                .localeCompare(
+                    b.dataset.date || ""
+                )
+            );
+
+        }
+
+        return (
+            (b.dataset.date || "")
+            .localeCompare(
+                a.dataset.date || ""
+            )
+        );
+
+    });
+
+    rows.forEach(function(row){
+        tableBody.appendChild(row);
+    });
+
+    renumberRows();
+    filterSales();
+
+}
+
+function renumberRows(){
+
+    const rows =
+        document.querySelectorAll(".sale-row");
+
+    let number = 1;
+
+    rows.forEach(function(row){
+
+        const numberBox =
+            row.querySelector(".sale-number");
+
+        if(numberBox){
+            numberBox.textContent = number;
+        }
+
+        number++;
+
+    });
+
+}
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+        renumberRows();
+        filterSales();
+
+    }
+);
+
+const searchBox =
+    document.getElementById("salesSearch");
+
+if(searchBox){
+
+    searchBox.addEventListener(
+        "keydown",
+        function(event){
+
+            if(event.key === "Enter"){
+                filterSales();
+            }
+
+        }
+    );
+
+}
+
+window.addEventListener(
+    "beforeprint",
+    function(){
+        document.title =
+            "National Steel - Sales History";
+    }
+);
+
+</script>
+
+</body>
+</html>
