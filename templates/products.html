@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>National Steel | Products & Inventory</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='background.css') }}">
+
+<style>
+:root{
+    --bg:#f4f7fb;
+    --card:#ffffff;
+    --text:#172033;
+    --muted:#6b7280;
+    --line:#e6eaf0;
+    --dark:#111827;
+    --dark2:#1f2937;
+    --accent:#f59e0b;
+    --accent2:#d97706;
+    --green:#16a34a;
+    --red:#dc2626;
+    --blue:#2563eb;
+    --shadow:0 18px 50px rgba(15,23,42,.08);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+    font-family:Inter,Segoe UI,Arial,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+}
+a{text-decoration:none;color:inherit}
+button,input,select{font:inherit}
+.layout{display:flex;min-height:100vh}
+
+/* SIDEBAR */
+.sidebar{
+    width:270px;
+    background:linear-gradient(180deg,#0f172a,#111827 55%,#172033);
+    color:#fff;
+    position:fixed;
+    left:0;top:0;bottom:0;
+    padding:25px 18px;
+    overflow-y:auto;
+    z-index:20;
+}
+.brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:5px 10px 25px;
+    border-bottom:1px solid rgba(255,255,255,.09);
+}
+.logo{
+    width:48px;height:48px;
+    border-radius:13px;
+    object-fit:cover;
+    background:#fff;
+    padding:3px;
+}
+.brand h1{font-size:19px;letter-spacing:.4px}
+.brand p{font-size:11px;color:#aeb8c8;margin-top:3px}
+.nav{margin-top:24px}
+.nav-title{
+    font-size:10px;
+    color:#7f8ba1;
+    text-transform:uppercase;
+    letter-spacing:1.5px;
+    padding:0 12px 9px;
+}
+.nav a{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:12px 13px;
+    border-radius:11px;
+    margin-bottom:5px;
+    color:#cbd5e1;
+    font-size:14px;
+    transition:.2s;
+}
+.nav a:hover,.nav a.active{
+    background:rgba(255,255,255,.09);
+    color:#fff;
+}
+.nav a.active{
+    border-left:3px solid var(--accent);
+    padding-left:10px;
+}
+.icon{width:21px;text-align:center;font-size:17px}
+.owner{
+    margin-top:30px;
+    padding:14px;
+    border:1px solid rgba(255,255,255,.09);
+    border-radius:14px;
+    background:rgba(255,255,255,.04);
+}
+.owner small{color:#94a3b8;font-size:10px}
+.owner strong{display:block;margin-top:4px;font-size:14px}
+.logout{
+    display:block;
+    margin-top:12px;
+    padding:9px;
+    text-align:center;
+    border-radius:9px;
+    background:rgba(220,38,38,.12);
+    color:#fecaca!important;
+    font-size:12px!important;
+}
+
+/* MAIN */
+.main{
+    margin-left:270px;
+    width:calc(100% - 270px);
+    min-height:100vh;
+}
+.topbar{
+    height:72px;
+    background:#fff;
+    border-bottom:1px solid var(--line);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 34px;
+    position:sticky;
+    top:0;
+    z-index:10;
+}
+.breadcrumb{font-size:13px;color:var(--muted)}
+.breadcrumb strong{color:var(--text)}
+.top-actions{display:flex;align-items:center;gap:12px}
+.badge{
+    padding:8px 12px;
+    border-radius:20px;
+    background:#fff7e6;
+    color:#a16207;
+    font-size:12px;
+    font-weight:700;
+}
+.content{padding:34px}
+
+/* HERO */
+.hero{
+    background:
+      radial-gradient(circle at 88% 15%,rgba(245,158,11,.28),transparent 26%),
+      linear-gradient(135deg,#111827,#263244);
+    border-radius:24px;
+    padding:32px;
+    color:#fff;
+    position:relative;
+    overflow:hidden;
+    box-shadow:var(--shadow);
+}
+.hero:after{
+    content:"";
+    position:absolute;
+    width:230px;height:230px;
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:50%;
+    right:-60px;bottom:-90px;
+}
+.hero-tag{
+    display:inline-flex;
+    padding:7px 11px;
+    border-radius:20px;
+    background:rgba(245,158,11,.14);
+    color:#fbbf24;
+    font-size:11px;
+    font-weight:800;
+    letter-spacing:1px;
+    text-transform:uppercase;
+}
+.hero h2{font-size:32px;margin-top:14px;position:relative;z-index:1}
+.hero p{
+    margin-top:9px;
+    max-width:720px;
+    color:#cbd5e1;
+    line-height:1.65;
+    font-size:14px;
+    position:relative;z-index:1;
+}
+.hero-row{
+    display:flex;
+    gap:12px;
+    margin-top:22px;
+    flex-wrap:wrap;
+}
+.hero-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:11px 16px;
+    border-radius:10px;
+    font-size:13px;
+    font-weight:800;
+}
+.hero-btn.primary{background:var(--accent);color:#111827}
+.hero-btn.secondary{background:rgba(255,255,255,.09);color:#fff}
+
+/* STATS */
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:16px;
+    margin:22px 0;
+}
+.stat{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding:20px;
+    box-shadow:0 7px 25px rgba(15,23,42,.04);
+}
+.stat-top{display:flex;justify-content:space-between;align-items:center}
+.stat-icon{
+    width:39px;height:39px;
+    display:grid;place-items:center;
+    border-radius:11px;
+    background:#f8fafc;
+}
+.stat span{font-size:11px;color:var(--muted)}
+.stat h3{font-size:25px;margin-top:10px}
+.stat p{font-size:11px;color:#94a3b8;margin-top:5px}
+
+/* TOOLBAR */
+.section-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:end;
+    gap:15px;
+    margin:30px 0 14px;
+}
+.section-head h3{font-size:20px}
+.section-head p{font-size:12px;color:var(--muted);margin-top:4px}
+.toolbar{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:17px;
+    padding:15px;
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    align-items:center;
+    box-shadow:0 7px 25px rgba(15,23,42,.03);
+}
+.search{
+    flex:1;
+    min-width:220px;
+    position:relative;
+}
+.search input{
+    width:100%;
+    padding:12px 14px 12px 40px;
+    border:1px solid var(--line);
+    border-radius:10px;
+    outline:none;
+    background:#f8fafc;
+}
+.search-icon{
+    position:absolute;
+    left:14px;top:11px;
+    color:#94a3b8;
+}
+.filter{
+    padding:11px 13px;
+    border:1px solid var(--line);
+    border-radius:10px;
+    background:#fff;
+    color:#374151;
+    outline:none;
+}
+.action-btn{
+    padding:11px 15px;
+    border:0;
+    border-radius:10px;
+    background:var(--dark);
+    color:#fff;
+    font-weight:700;
+    cursor:pointer;
+}
+.action-btn.gold{background:var(--accent);color:#111827}
+
+/* TABLE */
+.table-card{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:19px;
+    overflow:hidden;
+    box-shadow:0 8px 28px rgba(15,23,42,.04);
+}
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:780px}
+thead{background:#f8fafc}
+th{
+    padding:14px 18px;
+    text-align:left;
+    font-size:10px;
+    color:#64748b;
+    text-transform:uppercase;
+    letter-spacing:.8px;
+    border-bottom:1px solid var(--line);
+}
+td{
+    padding:16px 18px;
+    border-bottom:1px solid #eef1f5;
+    font-size:13px;
+}
+tbody tr:hover{background:#fafafa}
+.product-name{font-weight:800}
+.product-id{font-size:10px;color:#94a3b8;margin-top:3px}
+.pill{
+    display:inline-flex;
+    padding:6px 9px;
+    border-radius:20px;
+    font-size:10px;
+    font-weight:800;
+}
+.pill.pipe{background:#eff6ff;color:#1d4ed8}
+.pill.angle{background:#fff7ed;color:#c2410c}
+.pill.other{background:#f3f4f6;color:#4b5563}
+.stock-good{color:var(--green);font-weight:800}
+.stock-low{color:#d97706;font-weight:800}
+.stock-out{color:var(--red);font-weight:800}
+.price{font-weight:800}
+.row-actions{display:flex;gap:7px}
+.small-btn{
+    border:1px solid var(--line);
+    background:#fff;
+    padding:7px 10px;
+    border-radius:8px;
+    font-size:11px;
+    cursor:pointer;
+}
+.small-btn:hover{background:#f8fafc}
+.small-btn.danger{color:var(--red)}
+
+/* STARTER CATALOGUE */
+.catalog{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:13px;
+}
+.catalog-item{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:15px;
+    padding:16px;
+    transition:.2s;
+}
+.catalog-item:hover{
+    transform:translateY(-3px);
+    box-shadow:0 12px 28px rgba(15,23,42,.08);
+}
+.catalog-number{
+    width:28px;height:28px;
+    display:grid;place-items:center;
+    border-radius:8px;
+    background:#fff7e6;
+    color:#a16207;
+    font-size:11px;
+    font-weight:900;
+}
+.catalog-item h4{font-size:14px;margin-top:12px}
+.catalog-item p{font-size:11px;color:var(--muted);margin-top:5px}
+
+/* INFO GRID */
+.info-grid{
+    display:grid;
+    grid-template-columns:1.2fr .8fr;
+    gap:18px;
+    margin-top:20px;
+}
+.info-card{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding:22px;
+}
+.info-card h4{font-size:16px;margin-bottom:14px}
+.info-card p{font-size:12px;color:var(--muted);line-height:1.7}
+.tips{display:grid;gap:10px}
+.tip{
+    display:flex;
+    gap:10px;
+    padding:11px;
+    background:#f8fafc;
+    border-radius:11px;
+    font-size:11px;
+    color:#475569;
+}
+.tip b{color:#111827}
+
+/* EMPTY */
+.empty{
+    padding:45px 20px;
+    text-align:center;
+    color:var(--muted);
+}
+.empty-icon{font-size:35px;margin-bottom:10px}
+.empty h4{color:var(--text);font-size:16px}
+.empty p{font-size:12px;margin-top:5px}
+
+/* RESPONSIVE */
+@media(max-width:1100px){
+    .stats{grid-template-columns:repeat(2,1fr)}
+    .catalog{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:850px){
+    .sidebar{width:220px}
+    .main{margin-left:220px;width:calc(100% - 220px)}
+    .content{padding:22px}
+    .info-grid{grid-template-columns:1fr}
+    .catalog{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:650px){
+    .sidebar{
+        position:relative;
+        width:100%;
+        height:auto;
+    }
+    .main{margin-left:0;width:100%}
+    .layout{display:block}
+    .topbar{padding:0 18px}
+    .content{padding:16px}
+    .stats{grid-template-columns:1fr}
+    .catalog{grid-template-columns:1fr}
+    .hero h2{font-size:25px}
+}
+</style>
+</head>
+
+<body>
+
+<div class="layout">
+
+<aside class="sidebar">
+
+    <div class="brand">
+        <img class="logo" src="{{ url_for('static', filename='logo.jpg.jpeg') }}" alt="National Steel">
+        <div>
+            <h1>National Steel</h1>
+            <p>Owner Management System</p>
+        </div>
+    </div>
+
+    <nav class="nav">
+        <div class="nav-title">Main Menu</div>
+
+        <a href="{{ url_for('owner_dashboard') }}">
+            <span class="icon">⌂</span> Dashboard
+        </a>
+
+        <a href="{{ url_for('products') }}" class="active">
+            <span class="icon">▦</span> Products
+        </a>
+
+        <a href="{{ url_for('add_product') }}">
+            <span class="icon">＋</span> Add Product
+        </a>
+
+        <a href="{{ url_for('sales') }}">
+            <span class="icon">₹</span> Sales
+        </a>
+
+        <a href="{{ url_for('sales_history') }}">
+            <span class="icon">◷</span> Sales History
+        </a>
+
+        <div class="nav-title" style="margin-top:22px">Management</div>
+
+        <a href="{{ url_for('reports') }}">
+            <span class="icon">▤</span> Reports
+        </a>
+
+        <a href="{{ url_for('about') }}">
+            <span class="icon">ⓘ</span> About
+        </a>
+    </nav>
+
+    <div class="owner">
+        <small>LOGGED IN AS</small>
+        <strong>Rizwan • Owner</strong>
+        <a class="logout" href="{{ url_for('owner_logout') }}">Logout</a>
+    </div>
+
+</aside>
+
+
+<main class="main">
+
+    <header class="topbar">
+        <div class="breadcrumb">
+            National Steel / <strong>Products & Inventory</strong>
+        </div>
+        <div class="top-actions">
+            <span class="badge">● Owner Access</span>
+        </div>
+    </header>
+
+
+    <section class="content">
+
+        <div class="hero">
+            <span class="hero-tag">Inventory Control</span>
+            <h2>Products & Inventory</h2>
+            <p>
+                Manage your complete National Steel product catalogue, monitor stock,
+                check pricing and maintain unlimited inventory records from one place.
+            </p>
+
+            <div class="hero-row">
+                <a class="hero-btn primary" href="{{ url_for('add_product') }}">
+                    ＋ Add New Product
+                </a>
+                <a class="hero-btn secondary" href="{{ url_for('sales') }}">
+                    ₹ Create Sale
+                </a>
+            </div>
+        </div>
+
+
+        <div class="stats">
+
+            <div class="stat">
+                <div class="stat-top">
+                    <span>Total Products</span>
+                    <div class="stat-icon">▦</div>
+                </div>
+                <h3>{{ products|length }}</h3>
+                <p>Current database records</p>
+            </div>
+
+            <div class="stat">
+                <div class="stat-top">
+                    <span>Total Stock</span>
+                    <div class="stat-icon">📦</div>
+                </div>
+                <h3>
+                    {% set total_stock = namespace(value=0) %}
+                    {% for p in products %}
+                        {% set total_stock.value = total_stock.value + (p['stock'] or 0) %}
+                    {% endfor %}
+                    {{ total_stock.value }}
+                </h3>
+                <p>Units currently recorded</p>
+            </div>
+
+            <div class="stat">
+                <div class="stat-top">
+                    <span>Inventory Value</span>
+                    <div class="stat-icon">₹</div>
+                </div>
+                <h3>
+                    ₹
+                    {% set inv = namespace(value=0) %}
+                    {% for p in products %}
+                        {% set inv.value = inv.value + ((p['price'] or 0) * (p['stock'] or 0)) %}
+                    {% endfor %}
+                    {{ "%.0f"|format(inv.value) }}
+                </h3>
+                <p>Estimated stock value</p>
+            </div>
+
+            <div class="stat">
+                <div class="stat-top">
+                    <span>Catalogue</span>
+                    <div class="stat-icon">★</div>
+                </div>
+                <h3>12+</h3>
+                <p>Starter steel sizes</p>
+            </div>
+
+        </div>
+
+
+        <div class="section-head">
+            <div>
+                <h3>Inventory Records</h3>
+                <p>Search, filter and manage every product stored in your database.</p>
+            </div>
+        </div>
+
+
+        <div class="toolbar">
+
+            <div class="search">
+                <span class="search-icon">⌕</span>
+                <input
+                    type="text"
+                    id="productSearch"
+                    placeholder="Search product, category or size..."
+                    onkeyup="filterProducts()">
+            </div>
+
+            <select class="filter" id="categoryFilter" onchange="filterProducts()">
+                <option value="">All Categories</option>
+                <option value="pipe">Pipe</option>
+                <option value="angle">Angle</option>
+                <option value="other">Other</option>
+            </select>
+
+            <select class="filter" id="stockFilter" onchange="filterProducts()">
+                <option value="">All Stock</option>
+                <option value="good">In Stock</option>
+                <option value="low">Low Stock</option>
+                <option value="out">Out of Stock</option>
+            </select>
+
+            <button class="action-btn" onclick="clearFilters()">Reset</button>
+
+        </div>
+
+
+        <div class="table-card" style="margin-top:14px">
+
+            <div class="table-wrap">
+
+                <table id="productTable">
+
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Product</th>
+                            <th>Category</th>
+                            <th>Price</th>
+                            <th>Stock</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                    {% if products %}
+
+                        {% for product in products %}
+
+                        <tr
+                            data-name="{{ product['name']|lower }}"
+                            data-category="{{ product['category']|lower }}"
+                            data-stock="{{ product['stock'] or 0 }}">
+
+                            <td>
+                                <strong>{{ loop.index }}</strong>
+                            </td>
+
+                            <td>
+                                <div class="product-name">
+                                    {{ product['name'] }}
+                                </div>
+                                <div class="product-id">
+                                    Product ID #{{ product['id'] }}
+                                </div>
+                            </td>
+
+                            <td>
+                                {% set cat = (product['category'] or 'Other')|lower %}
+                                <span class="pill {{ 'pipe' if 'pipe' in cat else ('angle' if 'angle' in cat else 'other') }}">
+                                    {{ product['category'] or 'Other' }}
+                                </span>
+                            </td>
+
+                            <td>
+                                <span class="price">
+                                    ₹{{ "%.2f"|format(product['price'] or 0) }}
+                                </span>
+                            </td>
+
+                            <td>
+                                <strong>{{ product['stock'] or 0 }}</strong>
+                            </td>
+
+                            <td>
+                                {% if (product['stock'] or 0) <= 0 %}
+                                    <span class="stock-out">● Out of Stock</span>
+                                {% elif (product['stock'] or 0) <= 10 %}
+                                    <span class="stock-low">● Low Stock</span>
+                                {% else %}
+                                    <span class="stock-good">● In Stock</span>
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                <div class="row-actions">
+                                    <a class="small-btn" href="{{ url_for('add_product') }}">Edit</a>
+
+                                    <a
+                                        class="small-btn danger"
+                                        href="{{ url_for('delete_product', product_id=product['id']) }}"
+                                        onclick="return confirm('Delete this product?');">
+                                        Delete
+                                    </a>
+                                </div>
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    {% else %}
+
+                        <tr>
+                            <td colspan="7">
+                                <div class="empty">
+                                    <div class="empty-icon">📦</div>
+                                    <h4>No inventory records yet</h4>
+                                    <p>Add your first product to start managing National Steel inventory.</p>
+                                    <a class="hero-btn primary" style="margin-top:15px;display:inline-flex"
+                                       href="{{ url_for('add_product') }}">
+                                        ＋ Add First Product
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+
+                    {% endif %}
+
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+
+
+        <div class="section-head">
+            <div>
+                <h3>National Steel Starter Catalogue</h3>
+                <p>Standard sizes ready to add into your inventory.</p>
+            </div>
+        </div>
+
+
+        <div class="catalog">
+
+            <div class="catalog-item">
+                <div class="catalog-number">01</div>
+                <h4>Pipe 1*1</h4>
+                <p>Square Pipe</p>
+            </div>
+
+            <di

@@ -1,0 +1,1431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>NATIONAL STEEL | Stronger Steel. Stronger Builds.</title>
+
+<meta name="description"
+content="National Steel, Bhokar, Nanded - Quality steel pipes, angles and structural steel products for construction and fabrication.">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:#f4f7f9;
+    color:#172d40;
+    line-height:1.6;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+.container{
+    width:min(1180px,92%);
+    margin:auto;
+}
+
+/* ================= TOP BAR ================= */
+
+.topbar{
+    background:#071722;
+    color:#dce8ee;
+    font-size:13px;
+}
+
+.topbar-inner{
+    min-height:42px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+}
+
+.topbar-right{
+    display:flex;
+    gap:20px;
+}
+
+.topbar-right a{
+    color:#35c4f5;
+    font-weight:bold;
+}
+
+/* ================= HEADER ================= */
+
+header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    background:white;
+    border-bottom:1px solid #e1e8ed;
+    box-shadow:0 5px 20px rgba(0,0,0,.06);
+}
+
+.navbar{
+    min-height:82px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.logo{
+    width:55px;
+    height:55px;
+    object-fit:cover;
+    border-radius:9px;
+}
+
+.brand-name{
+    font-size:22px;
+    font-weight:900;
+    letter-spacing:2px;
+    color:#102c43;
+}
+
+.brand-tagline{
+    font-size:9px;
+    color:#71818d;
+    letter-spacing:1.5px;
+    font-weight:bold;
+}
+
+.nav-links{
+    display:flex;
+    align-items:center;
+    gap:24px;
+}
+
+.nav-links a{
+    font-size:14px;
+    font-weight:bold;
+    color:#405464;
+    transition:.2s;
+}
+
+.nav-links a:hover{
+    color:#079ddd;
+}
+
+.owner-btn{
+    color:#079ddd !important;
+}
+
+.call-btn{
+    background:#079ddd;
+    color:white !important;
+    padding:11px 17px;
+    border-radius:7px;
+}
+
+.menu-btn{
+    display:none;
+    background:#102c43;
+    color:white;
+    border:0;
+    border-radius:7px;
+    padding:9px 13px;
+    font-size:21px;
+    cursor:pointer;
+}
+
+/* ================= HERO ================= */
+
+.hero{
+    min-height:650px;
+    display:flex;
+    align-items:center;
+    color:white;
+    background:
+        linear-gradient(90deg,
+        rgba(3,14,23,.96),
+        rgba(4,27,42,.84),
+        rgba(4,27,42,.45)),
+        url("https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=1900&q=85")
+        center/cover;
+}
+
+.hero-content{
+    max-width:760px;
+}
+
+.badge{
+    display:inline-block;
+    padding:8px 14px;
+    border:1px solid #29bdf1;
+    border-radius:30px;
+    color:#bceeff;
+    font-size:11px;
+    font-weight:bold;
+    margin-bottom:20px;
+}
+
+.hero h1{
+    font-size:clamp(45px,7vw,78px);
+    line-height:1;
+    margin-bottom:24px;
+}
+
+.hero h1 span{
+    color:#15baf0;
+}
+
+.hero p{
+    max-width:680px;
+    color:#d7e5ed;
+    font-size:17px;
+    margin-bottom:30px;
+}
+
+.hero-buttons{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+.btn{
+    display:inline-block;
+    padding:13px 21px;
+    border-radius:8px;
+    font-weight:bold;
+    font-size:14px;
+}
+
+.btn-primary{
+    background:#08a7e6;
+    color:white;
+}
+
+.btn-white{
+    background:white;
+    color:#102c43;
+}
+
+.hero-info{
+    display:flex;
+    gap:35px;
+    margin-top:40px;
+    flex-wrap:wrap;
+}
+
+.hero-info strong{
+    display:block;
+    font-size:16px;
+}
+
+.hero-info span{
+    color:#abc0cc;
+    font-size:11px;
+}
+
+/* ================= COMMON ================= */
+
+.section{
+    padding:85px 0;
+}
+
+.section-heading{
+    max-width:700px;
+    text-align:center;
+    margin:0 auto 45px;
+}
+
+.kicker{
+    color:#079ddd;
+    font-size:11px;
+    font-weight:900;
+    letter-spacing:2px;
+    text-transform:uppercase;
+}
+
+.section-heading h2{
+    color:#102c43;
+    font-size:38px;
+    margin:9px 0 13px;
+}
+
+.section-heading p{
+    color:#71818d;
+    font-size:15px;
+}
+
+/* ================= ABOUT ================= */
+
+.about{
+    background:#f0f5f7;
+}
+
+.about-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:55px;
+    align-items:center;
+}
+
+.about-photo{
+    min-height:420px;
+    border-radius:18px;
+    overflow:hidden;
+    background:#102c43;
+}
+
+.about-photo img{
+    width:100%;
+    height:100%;
+    min-height:420px;
+    object-fit:cover;
+}
+
+.about-text h2{
+    color:#102c43;
+    font-size:38px;
+    margin:8px 0 18px;
+}
+
+.about-text p{
+    color:#687984;
+    margin-bottom:15px;
+}
+
+.points{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:13px;
+    margin-top:24px;
+}
+
+.point{
+    font-weight:bold;
+    color:#304859;
+}
+
+.point span{
+    color:#079ddd;
+    margin-right:7px;
+}
+
+/* ================= PRODUCTS ================= */
+
+.products{
+    background:white;
+}
+
+.product-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:22px;
+}
+
+.product-card{
+    background:white;
+    border:1px solid #dfe7ec;
+    border-radius:15px;
+    overflow:hidden;
+    box-shadow:0 8px 25px rgba(0,0,0,.06);
+    transition:.2s;
+}
+
+.product-card:hover{
+    transform:translateY(-5px);
+}
+
+.product-image{
+    height:180px;
+    background:linear-gradient(135deg,#0a2639,#2a5a70);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:white;
+    font-size:42px;
+    font-weight:900;
+}
+
+.product-content{
+    padding:22px;
+}
+
+.product-tag{
+    display:inline-block;
+    background:#e8f8fd;
+    color:#078fc8;
+    padding:5px 10px;
+    border-radius:20px;
+    font-size:10px;
+    font-weight:bold;
+}
+
+.product-content h3{
+    margin:10px 0 7px;
+    font-size:20px;
+    color:#173248;
+}
+
+.product-content p{
+    color:#71818c;
+    font-size:13px;
+}
+
+/* ================= SERVICES ================= */
+
+.services{
+    background:#0b2233;
+    color:white;
+}
+
+.services .section-heading h2{
+    color:white;
+}
+
+.services .section-heading p{
+    color:#abc0cc;
+}
+
+.service-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.service-card{
+    padding:28px;
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:14px;
+    background:rgba(255,255,255,.05);
+}
+
+.service-icon{
+    font-size:30px;
+    margin-bottom:15px;
+}
+
+.service-card h3{
+    margin-bottom:8px;
+}
+
+.service-card p{
+    color:#aec0ca;
+    font-size:13px;
+}
+
+/* ================= WHY US ================= */
+
+.why{
+    background:white;
+}
+
+.why-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+}
+
+.why-card{
+    border:1px solid #e0e8ed;
+    border-radius:14px;
+    padding:25px;
+}
+
+.why-number{
+    color:#079ddd;
+    font-size:30px;
+    font-weight:900;
+}
+
+.why-card h3{
+    margin:7px 0;
+}
+
+.why-card p{
+    color:#70808c;
+    font-size:12px;
+}
+
+/* ================= CONTACT ================= */
+
+.contact{
+    background:#f0f5f7;
+}
+
+.contact-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:25px;
+}
+
+.contact-card{
+    background:white;
+    border:1px solid #e0e8ed;
+    border-radius:15px;
+    padding:30px;
+}
+
+.contact-card h3{
+    color:#122d43;
+    font-size:25px;
+    margin-bottom:20px;
+}
+
+.contact-row{
+    display:flex;
+    gap:13px;
+    margin:18px 0;
+}
+
+.contact-icon{
+    width:42px;
+    height:42px;
+    flex:0 0 42px;
+    display:grid;
+    place-items:center;
+    border-radius:9px;
+    background:#e8f8fd;
+    color:#078fc8;
+}
+
+.contact-row strong{
+    display:block;
+    color:#75848f;
+    font-size:11px;
+}
+
+.contact-row span{
+    color:#243e51;
+    font-size:14px;
+    font-weight:bold;
+}
+
+.contact-buttons{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:25px;
+}
+
+.whatsapp{
+    background:#20b95a;
+    color:white;
+}
+
+.location-box{
+    border-radius:15px;
+    padding:35px;
+    min-height:100%;
+    color:white;
+    background:
+        linear-gradient(135deg,
+        rgba(7,36,55,.94),
+        rgba(8,92,124,.82)),
+        url("https://images.unsplash.com/photo-1524666041070-9d87656c25bb?auto=format&fit=crop&w=1000&q=80")
+        center/cover;
+}
+
+.location-box h3{
+    font-size:30px;
+}
+
+.location-box p{
+    color:#c5dce5;
+    margin:12px 0 25px;
+}
+
+/* ================= CTA ================= */
+
+.cta{
+    background:linear-gradient(110deg,#078fc9,#0b3c5b);
+    color:white;
+    padding:60px 0;
+}
+
+.cta-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:25px;
+}
+
+.cta h2{
+    font-size:36px;
+}
+
+.cta p{
+    color:#d1e4ed;
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+    background:#061520;
+    color:#aebfc9;
+    padding:45px 0 20px;
+}
+
+.footer-grid{
+    display:grid;
+    grid-template-columns:1.5fr 1fr 1fr;
+    gap:40px;
+}
+
+.footer-brand{
+    color:white;
+    font-size:22px;
+    font-weight:900;
+    letter-spacing:2px;
+}
+
+.footer h4{
+    color:white;
+    margin-bottom:12px;
+}
+
+.footer a{
+    display:block;
+    font-size:12px;
+    margin:7px 0;
+}
+
+.footer p{
+    font-size:12px;
+    margin-top:12px;
+}
+
+.footer-bottom{
+    border-top:1px solid rgba(255,255,255,.1);
+    margin-top:30px;
+    padding-top:17px;
+    text-align:center;
+    font-size:10px;
+}
+
+/* ================= WHATSAPP ================= */
+
+.floating-whatsapp{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    z-index:2000;
+    width:58px;
+    height:58px;
+    border-radius:50%;
+    display:grid;
+    place-items:center;
+    background:#20b95a;
+    color:white;
+    font-size:25px;
+    box-shadow:0 8px 25px rgba(0,0,0,.25);
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:950px){
+
+    .nav-links{
+        display:none;
+        position:absolute;
+        left:0;
+        right:0;
+        top:82px;
+        background:white;
+        flex-direction:column;
+        align-items:stretch;
+        padding:10px 5%;
+        box-shadow:0 15px 25px rgba(0,0,0,.08);
+    }
+
+    .nav-links.open{
+        display:flex;
+    }
+
+    .nav-links a{
+        padding:12px 5px;
+        border-bottom:1px solid #edf0f2;
+    }
+
+    .menu-btn{
+        display:block;
+    }
+
+    .product-grid,
+    .service-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .why-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .about-grid,
+    .contact-grid{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:600px){
+
+    .topbar-inner{
+        justify-content:center;
+    }
+
+    .topbar-left{
+        display:none;
+    }
+
+    .brand-name{
+        font-size:17px;
+    }
+
+    .brand-tagline{
+        font-size:7px;
+    }
+
+    .logo{
+        width:48px;
+        height:48px;
+    }
+
+    .hero{
+        min-height:620px;
+    }
+
+    .hero h1{
+        font-size:43px;
+    }
+
+    .hero p{
+        font-size:14px;
+    }
+
+    .hero-info{
+        gap:18px;
+    }
+
+    .product-grid,
+    .service-grid,
+    .why-grid,
+    .footer-grid{
+        grid-template-columns:1fr;
+    }
+
+    .points{
+        grid-template-columns:1fr;
+    }
+
+    .section{
+        padding:65px 0;
+    }
+
+    .section-heading h2,
+    .about-text h2{
+        font-size:30px;
+    }
+
+    .cta-row{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .cta h2{
+        font-size:29px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= TOP BAR ================= -->
+
+<div class="topbar">
+    <div class="container topbar-inner">
+
+        <div class="topbar-left">
+            <span>📍 Amin Nagar, Kinwat Road, Bhokar, Dist. Nanded</span>
+        </div>
+
+        <div class="topbar-right">
+            <span>Owner: Abdul Rizwan Abdul Rauf</span>
+            <a href="tel:9404666586">📞 9404666586</a>
+        </div>
+
+    </div>
+</div>
+
+<!-- ================= HEADER ================= -->
+
+<header>
+
+<div class="container navbar">
+
+    <a href="#home" class="brand">
+
+        <img
+            src="/static/logo.jpg.jpeg"
+            alt="National Steel Logo"
+            class="logo">
+
+        <div>
+            <div class="brand-name">NATIONAL STEEL</div>
+            <div class="brand-tagline">
+                STRONGER TODAY • BUILDING TOMORROW
+            </div>
+        </div>
+
+    </a>
+
+    <button class="menu-btn" onclick="toggleMenu()">
+        ☰
+    </button>
+
+    <nav class="nav-links" id="navLinks">
+
+        <a href="#home">Home</a>
+
+        <a href="#about">About</a>
+
+        <a href="#products">Products</a>
+
+        <a href="#services">Services</a>
+
+        <a href="#why-us">Why Us</a>
+
+        <a href="#contact">Contact</a>
+
+        <!-- OWNER LOGIN -->
+        <a href="/owner-login" class="owner-btn">
+            🔐 Owner
+        </a>
+
+        <a href="tel:9404666586" class="call-btn">
+            📞 Call Now
+        </a>
+
+    </nav>
+
+</div>
+
+</header>
+
+<!-- ================= HOME ================= -->
+
+<section class="hero" id="home">
+
+<div class="container">
+
+<div class="hero-content">
+
+    <div class="badge">
+        ● TRUSTED STEEL SUPPLIER • BHOKAR
+    </div>
+
+    <h1>
+        STRONG STEEL.<br>
+        <span>STRONGER</span><br>
+        BUILDS.
+    </h1>
+
+    <p>
+        Quality steel pipes, angles and structural steel products
+        for construction, fabrication and industrial requirements.
+        Reliable products. Professional service.
+        A name you can build with.
+    </p>
+
+    <div class="hero-buttons">
+
+        <a href="#products" class="btn btn-primary">
+            Explore Products
+        </a>
+
+        <a href="#contact" class="btn btn-white">
+            Contact Us
+        </a>
+
+    </div>
+
+    <div class="hero-info">
+
+        <div>
+            <strong>Quality Steel</strong>
+            <span>Reliable Products</span>
+        </div>
+
+        <div>
+            <strong>Professional Service</strong>
+            <span>Customer Focused</span>
+        </div>
+
+        <div>
+            <strong>Bhokar, Nanded</strong>
+            <span>Serving Local Requirements</span>
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ================= ABOUT ================= -->
+
+<section class="section about" id="about">
+
+<div class="container">
+
+<div class="about-grid">
+
+    <div class="about-photo">
+
+        <img
+            src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=1000&q=85"
+            alt="Steel Industry">
+
+    </div>
+
+    <div class="about-text">
+
+        <div class="kicker">About National Steel</div>
+
+        <h2>
+            Built on Quality.<br>
+            Trusted for Strength.
+        </h2>
+
+        <p>
+            National Steel is a steel supplier based in Bhokar,
+            District Nanded, serving construction, fabrication
+            and structural requirements.
+        </p>
+
+        <p>
+            Our focus is simple — provide quality steel products,
+            dependable service and a professional buying experience
+            for customers and businesses.
+        </p>
+
+        <div class="points">
+
+            <div class="point">
+                <span>✓</span> Quality Products
+            </div>
+
+            <div class="point">
+                <span>✓</span> Reliable Service
+            </div>
+
+            <div class="point">
+                <span>✓</span> Competitive Pricing
+            </div>
+
+            <div class="point">
+                <span>✓</span> Customer Focus
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ================= PRODUCTS ================= -->
+
+<section class="section products" id="products">
+
+<div class="container">
+
+<div class="section-heading">
+
+    <div class="kicker">Our Products</div>
+
+    <h2>Steel Products You Can Depend On</h2>
+
+    <p>
+        Quality products for construction, fabrication,
+        structural and industrial applications.
+    </p>
+
+</div>
+
+<div class="product-grid">
+
+    <div class="product-card">
+
+        <div class="product-image">
+            PIPE
+        </div>
+
+        <div class="product-content">
+
+            <span class="product-tag">
+                STEEL PRODUCT
+            </span>
+
+            <h3>MS Steel Pipes</h3>
+
+            <p>
+                Strong and dependable steel pipes suitable
+                for construction, fabrication and general use.
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="product-card">
+
+        <div class="product-image">
+            ANGLE
+        </div>
+
+        <div class="product-content">
+
+            <span class="product-tag">
+                STRUCTURAL STEEL
+            </span>
+
+            <h3>MS Angles</h3>
+
+            <p>
+                Durable steel angles for structural frames,
+                fabrication and construction requirements.
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="product-card">
+
+        <div class="product-image">
+            MS
+        </div>
+
+        <div class="product-content">
+
+            <span class="product-tag">
+                STEEL
+            </span>
+
+            <h3>Structural Steel</h3>
+
+            <p>
+                Steel materials for various structural,
+                industrial and fabrication applications.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ================= SERVICES ================= -->
+
+<section class="section services" id="services">
+
+<div class="container">
+
+<div class="section-heading">
+
+    <div class="kicker">Our Services</div>
+
+    <h2>Professional Steel Supply Service</h2>
+
+    <p>
+        We focus on making steel purchasing simple,
+        reliable and convenient.
+    </p>
+
+</div>
+
+<div class="service-grid">
+
+    <div class="service-card">
+
+        <div class="service-icon">🏗️</div>
+
+        <h3>Construction Supply</h3>
+
+        <p>
+            Steel products for construction projects,
+            building work and structural requirements.
+        </p>
+
+    </div>
+
+    <div class="service-card">
+
+        <div class="service-icon">⚙️</div>
+
+        <h3>Fabrication Requirements</h3>
+
+        <p>
+            Steel pipes and angles suitable for fabrication,
+            frames and custom structural work.
+        </p>
+
+    </div>
+
+    <div class="service-card">
+
+        <div class="service-icon">🚚</div>
+
+        <h3>Reliable Supply</h3>
+
+        <p>
+            Professional handling of customer requirements
+            with dependable product availability.
+        </p>
+
+    </div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ================= WHY US ================= -->
+
+<section class="section why" id="why-us">
+
+<div class="container">
+
+<div class="section-heading">
+
+    <div class="kicker">Why Choose Us</div>
+
+    <h2>Why National Steel?</h2>
+
+    <p>
+        Strong products and a straightforward approach
+        to customer service.
+    </p>
+
+</div>
+
+<div class="why-grid">
+
+    <div class="why-card">
+
+        <div class="why-number">01</div>
+
+        <h3>Quality First</h3>
+
+        <p>
+            We focus on supplying dependable steel products
+            for practical applications.
+        </p>
+
+    </div>
+
+    <div class="why-card">
+
+        <div class="why-number">02</div>
+
+        <h3>Trusted Service</h3>
+
+        <p>
+            Clear communication and professional customer
+            support are our priorities.
+        </p>
+
+    </div>
+
+    <div class="why-card">
+
+        <div class="why-number">03</div>
+
+        <h3>Local Availability</h3>
+
+        <p>
+            Conveniently serving customers around Bhokar
+            and nearby areas.
+        </p>
+
+    </div>
+
+    <div class="why-card">
+
+        <div class="why-number">04</div>
+
+        <h3>Customer Focus</h3>
+
+        <p>
+            We work to understand requirements and provide
+            suitable steel solutions.
+        </p>
+
+    </div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ================= CONTACT ================= -->
+
+<section class="section contact" id="contact">
+
+<div class="container">
+
+<div class="section-heading">
+
+    <div class="kicker">Contact Us</div>
+
+    <h2>Let's Build Something Strong</h2>
+
+    <p>
+        Contact National Steel for product availability,
+        requirements and enquiries.
+    </p>
+
+</div>
+
+<div class="contact-grid">
+
+    <div class="contact-card">
+
+        <h3>Get in Touch</h3>
+
+        <div class="contact-row">
+
+            <div class="contact-icon">📍</div>
+
+            <div>
+                <strong>ADDRESS</strong>
+                <span>
+                    Amin Nagar, Kinwat Road,<br>
+                    Bhokar, Dist. Nanded, Maharashtra
+                </span>
+            </div>
+
+        </div>
+
+        <div class="contact-row">
+
+            <div class="contact-icon">📞</div>
+
+            <div>
+                <strong>PHONE</strong>
+                <span>9404666586</span>
+            </div>
+
+        </div>
+
+        <div class="contact-row">
+
+            <div class="contact-icon">👤</div>
+
+            <div>
+                <strong>OWNER</strong>
+                <span>Abdul Rizwan Abdul Rauf</span>
+            </div>
+
+        </div>
+
+        <div class="contact-buttons">
+
+            <a
+                href="tel:9404666586"
+                class="btn btn-primary">
+                📞 Call Now
+            </a>
+
+            <a
+                href="https://wa.me/919404666586"
+                target="_blank"
+                class="btn whatsapp">
+                WhatsApp
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="location-box">
+
+        <h3>National Steel</h3>
+
+        <p>
+            Amin Nagar, Kinwat Road,<br>
+            Bhokar, District Nanded,<br>
+            Maharashtra.
+        </p>
+
+        <a
+            href="https://www.google.com/maps/search/?api=1&query=Amin+Nagar+Kinwat+Road+Bhokar+Nanded"
+            target="_blank"
+            class="btn btn-white">
+            📍 Open Location
+        </a>
+
+    </div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ================= CTA ================= -->
+
+<section class="cta">
+
+<div class="container cta-row">
+
+    <div>
+
+        <h2>Need Quality Steel?</h2>
+
+        <p>
+            Talk to National Steel today.
+        </p>
+
+    </div>
+
+    <a
+        href="tel:9404666586"
+        class="btn btn-white">
+        📞 Call 9404666586
+    </a>
+
+</div>
+
+</section>
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+<div class="container">
+
+<div class="footer-grid">
+
+    <div>
+
+        <div class="footer-brand">
+            NATIONAL STEEL
+        </div>
+
+        <p>
+            Stronger Today • Building Tomorrow
+        </p>
+
+        <p>
+            Quality steel pipes, angles and structural
+            steel products for construction and fabrication.
+        </p>
+
+    </div>
+
+    <div>
+
+        <h4>Quick Links</h4>
+
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#products">Products</a>
+        <a href="#services">Services</a>
+        <a href="#why-us">Why Us</a>
+        <a href="#contact">Contact</a>
+
+    </div>
+
+    <div>
+
+        <h4>Owner</h4>
+
+        <a href="/owner-login">
+            🔐 Owner Login
+        </a>
+
+        <a href="tel:9404666586">
+            📞 9404666586
+        </a>
+
+        <p>
+            Abdul Rizwan Abdul Rauf
+        </p>
+
+    </div>
+
+</div>
+
+<div class="footer-bottom">
+
+    © 2026 National Steel. All Rights Reserved.
+
+</div>
+
+</div>
+
+</footer>
+
+<!-- ================= WHATSAPP ================= -->
+
+<a
+    href="https://wa.me/919404666586"
+    target="_blank"
+    class="floating-whatsapp"
+    title="Chat on WhatsApp">
+    💬
+</a>
+
+<script>
+
+function toggleMenu(){
+
+    const menu =
+        document.getElementById("navLinks");
+
+    menu.classList.toggle("open");
+
+}
+
+document.querySelectorAll(".nav-links a").forEach(
+    function(link){
+
+        link.addEventListener("click", function(){
+
+            document
+                .getElementById("navLinks")
+                .classList.remove("open");
+
+        });
+
+    }
+);
+
+</script>
+
+</body>
+</html>

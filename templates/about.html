@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>National Steel | About</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f4f6f8;
+    color:#18212b;
+}
+
+.layout{
+    display:flex;
+    min-height:100vh;
+}
+
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
+
+.sidebar{
+    width:250px;
+    background:#101722;
+    color:white;
+    padding:25px 18px;
+    position:fixed;
+    top:0;
+    bottom:0;
+    left:0;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:5px 8px 28px;
+    border-bottom:1px solid #26303d;
+}
+
+.logo-box{
+    width:50px;
+    height:50px;
+    border-radius:14px;
+    background:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#111;
+    font-weight:900;
+    font-size:18px;
+}
+
+.logo h2{
+    font-size:20px;
+    line-height:1.1;
+}
+
+.logo small{
+    color:#0db8c9;
+    font-size:10px;
+    font-weight:bold;
+}
+
+.menu-title{
+    color:#7e8997;
+    font-size:10px;
+    font-weight:bold;
+    letter-spacing:1.5px;
+    margin:28px 10px 10px;
+}
+
+.nav a{
+    display:block;
+    text-decoration:none;
+    color:#dbe1e8;
+    padding:13px 12px;
+    border-radius:9px;
+    margin:4px 0;
+    font-size:14px;
+    font-weight:600;
+}
+
+.nav a:hover,
+.nav a.active{
+    background:#1d2938;
+    color:white;
+    border-left:3px solid #f3a51a;
+}
+
+.owner{
+    position:absolute;
+    left:18px;
+    right:18px;
+    bottom:25px;
+    border-top:1px solid #26303d;
+    padding:20px 8px 0;
+}
+
+.owner small{
+    color:#7e8997;
+    font-size:10px;
+}
+
+.owner strong{
+    display:block;
+    margin-top:7px;
+    font-size:14px;
+}
+
+.logout{
+    display:block;
+    margin-top:15px;
+    text-align:center;
+    padding:11px;
+    border-radius:8px;
+    background:#40252a;
+    color:#ffb5b5;
+    text-decoration:none;
+    font-weight:bold;
+    font-size:13px;
+}
+
+/* =========================================================
+   MAIN
+   ========================================================= */
+
+.main{
+    margin-left:250px;
+    width:calc(100% - 250px);
+    padding:28px 34px 45px;
+}
+
+.topbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+}
+
+.breadcrumb{
+    font-size:13px;
+    color:#84909d;
+}
+
+.breadcrumb b{
+    color:#26313d;
+}
+
+.access{
+    background:#fff;
+    padding:9px 14px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;
+    box-shadow:0 2px 10px #0000000b;
+}
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.hero{
+    background:linear-gradient(110deg,#111d2b,#193244);
+    border-radius:22px;
+    padding:38px;
+    color:white;
+    margin-bottom:24px;
+}
+
+.hero .tag{
+    color:#f3ad28;
+    font-size:11px;
+    letter-spacing:2px;
+    font-weight:bold;
+}
+
+.hero h1{
+    font-size:34px;
+    margin:10px 0;
+}
+
+.hero p{
+    color:#d6e0e7;
+    max-width:760px;
+    font-size:14px;
+    line-height:1.7;
+}
+
+/* =========================================================
+   CONTENT GRID
+   ========================================================= */
+
+.grid{
+    display:grid;
+    grid-template-columns:1.2fr .8fr;
+    gap:20px;
+}
+
+.panel{
+    background:#fff;
+    border-radius:18px;
+    padding:26px;
+    box-shadow:0 3px 15px #0000000a;
+    margin-bottom:20px;
+}
+
+.panel h2{
+    font-size:19px;
+    margin-bottom:8px;
+}
+
+.panel-desc{
+    font-size:12px;
+    color:#8b959f;
+    line-height:1.6;
+    margin-bottom:20px;
+}
+
+/* =========================================================
+   ABOUT TEXT
+   ========================================================= */
+
+.about-text{
+    font-size:13px;
+    color:#596571;
+    line-height:1.8;
+}
+
+.about-text p{
+    margin-bottom:15px;
+}
+
+/* =========================================================
+   INFO CARDS
+   ========================================================= */
+
+.info-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:14px;
+}
+
+.info-card{
+    background:#f7f8f9;
+    border:1px solid #edf0f2;
+    border-radius:13px;
+    padding:18px;
+}
+
+.info-icon{
+    width:38px;
+    height:38px;
+    border-radius:10px;
+    background:#fff1d7;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:18px;
+    margin-bottom:12px;
+}
+
+.info-card h3{
+    font-size:14px;
+    margin-bottom:6px;
+}
+
+.info-card p{
+    font-size:11px;
+    color:#8a949e;
+    line-height:1.5;
+}
+
+/* =========================================================
+   SYSTEM FEATURES
+   ========================================================= */
+
+.feature{
+    display:flex;
+    gap:14px;
+    padding:15px 0;
+    border-bottom:1px solid #edf0f2;
+}
+
+.feature:last-child{
+    border-bottom:0;
+}
+
+.feature-icon{
+    width:38px;
+    height:38px;
+    flex-shrink:0;
+    border-radius:10px;
+    background:#eaf7f9;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:17px;
+}
+
+.feature h3{
+    font-size:13px;
+    margin-bottom:4px;
+}
+
+.feature p{
+    font-size:11px;
+    color:#8a949e;
+    line-height:1.5;
+}
+
+/* =========================================================
+   SYSTEM DETAILS
+   ========================================================= */
+
+.detail{
+    display:flex;
+    justify-content:space-between;
+    padding:13px 0;
+    border-bottom:1px solid #edf0f2;
+    font-size:12px;
+}
+
+.detail:last-child{
+    border-bottom:0;
+}
+
+.detail span:first-child{
+    color:#8a949e;
+}
+
+.detail strong{
+    color:#26313d;
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.footer{
+    text-align:center;
+    color:#929ca5;
+    font-size:11px;
+    padding:20px;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media(max-width:1000px){
+
+    .grid{
+        grid-template-columns:1fr;
+    }
+
+}
+
+@media(max-width:700px){
+
+    .sidebar{
+        width:190px;
+    }
+
+    .main{
+        margin-left:190px;
+        width:calc(100% - 190px);
+        padding:18px;
+    }
+
+    .hero{
+        padding:25px;
+    }
+
+    .hero h1{
+        font-size:27px;
+    }
+
+    .info-grid{
+        grid-template-columns:1fr;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="layout">
+
+<!-- =======================================================
+     SIDEBAR
+     ======================================================= -->
+
+<aside class="sidebar">
+
+    <div class="logo">
+
+        <div class="logo-box">
+            NS
+        </div>
+
+        <div>
+            <h2>National Steel</h2>
+            <small>OWNER MANAGEMENT SYSTEM</small>
+        </div>
+
+    </div>
+
+
+    <div class="menu-title">
+        MAIN MENU
+    </div>
+
+    <nav class="nav">
+
+        <a href="/owner-dashboard">
+            ⌂ &nbsp; Dashboard
+        </a>
+
+        <a href="/products">
+            ▣ &nbsp; Products
+        </a>
+
+        <a href="/add-product">
+            ＋ &nbsp; Add Product
+        </a>
+
+        <a href="/sales">
+            ₹ &nbsp; Sales
+        </a>
+
+        <a href="/sales-history">
+            ◷ &nbsp; Sales History
+        </a>
+
+    </nav>
+
+
+    <div class="menu-title">
+        MANAGEMENT
+    </div>
+
+    <nav class="nav">
+
+        <a href="/reports">
+            ▤ &nbsp; Reports
+        </a>
+
+        <a class="active" href="/about">
+            ⓘ &nbsp; About
+        </a>
+
+    </nav>
+
+
+    <div class="owner">
+
+        <small>LOGGED IN AS</small>
+
+        <strong>
+            Rizwan • Owner
+        </strong>
+
+        <a class="logout" href="/owner-logout">
+            Logout
+        </a>
+
+    </div>
+
+</aside>
+
+
+<!-- =======================================================
+     MAIN CONTENT
+     ======================================================= -->
+
+<main class="main">
+
+
+    <div class="topbar">
+
+        <div class="breadcrumb">
+            National Steel / <b>About</b>
+        </div>
+
+        <div class="access">
+            ● Owner Access
+        </div>
+
+    </div>
+
+
+    <!-- ===================================================
+         HERO
+         =================================================== -->
+
+    <section class="hero">
+
+        <div class="tag">
+            NATIONAL STEEL
+        </div>
+
+        <h1>
+            About the Management System
+        </h1>
+
+        <p>
+            National Steel Owner Management System is a private
+            business management platform designed to manage
+            products, inventory, sales and business reports
+            from one central dashboard.
+        </p>
+
+    </section>
+
+
+    <!-- ===================================================
+         MAIN GRID
+         =================================================== -->
+
+    <section class="grid">
+
+
+        <!-- LEFT COLUMN -->
+
+        <div>
+
+
+            <div class="panel">
+
+                <h2>
+                    About National Steel
+                </h2>
+
+                <div class="panel-desc">
+                    A simple and professional system for managing
+                    day-to-day steel business operations.
+                </div>
+
+                <div class="about-text">
+
+                    <p>
+                        National Steel is supported by a dedicated
+                        owner management system that keeps important
+                        business information organized in one place.
+                    </p>
+
+                    <p>
+                        The system allows the owner to manage products,
+                        monitor available stock, record sales and review
+                        sales history without maintaining separate
+                        manual records.
+                    </p>
+
+                    <p>
+                        Business reports provide a quick overview of
+                        sales performance, inventory health, product
+                        categories and low-stock items.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="panel">
+
+                <h2>
+                    System Capabilities
+                </h2>
+
+                <div class="panel-desc">
+                    Main features available in the owner panel.
+                </div>
+
+
+                <div class="info-grid">
+
+
+                    <div class="info-card">
+
+                        <div class="info-icon">
+                            ▣
+                        </div>
+
+                        <h3>
+                            Product Management
+                        </h3>
+
+                        <p>
+                            Add, edit, view and delete products
+                            with stock and pricing information.
+                        </p>
+
+                    </div>
+
+
+                    <div class="info-card">
+
+                        <div class="info-icon">
+                            📦
+                        </div>
+
+                        <h3>
+                            Inventory Control
+                        </h3>
+
+                        <p>
+                            Track available stock and identify
+                            products that need restocking.
+                        </p>
+
+                    </div>
+
+
+                    <div class="info-card">
+
+                        <div class="info-icon">
+                            ₹
+                        </div>
+
+                        <h3>
+                            Sales Management
+                        </h3>
+
+                        <p>
+                            Record sales transactions and automatically
+                            reduce product stock.
+                        </p>
+
+                    </div>
+
+
+                    <div class="info-card">
+
+                        <div class="info-icon">
+                            ▤
+                        </div>
+
+                        <h3>
+                            Reports & Analytics
+                        </h3>
+
+                        <p>
+                            Review sales, categories, stock and
+                            business performance.
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- RIGHT COLUMN -->
+
+        <div>
+
+
+            <div class="panel">
+
+                <h2>
+                    Key Features
+                </h2>
+
+                <div class="panel-desc">
+                    Designed for quick and reliable business control.
+                </div>
+
+
+                <div class="feature">
+
+                    <div class="feature-icon">
+                        🔐
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Private Owner Access
+                        </h3>
+
+                        <p>
+                            The management area is protected by
+                            owner login authentication.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="feature">
+
+                    <div class="feature-icon">
+                        ⚡
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Live Database
+                        </h3>
+
+                        <p>
+                            Dashboard information is connected
+                            directly to the business database.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="feature">
+
+                    <div class="feature-icon">
+                        📊
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Business Analytics
+                        </h3>
+
+                        <p>
+                            Important business statistics are
+                            available from the dashboard and reports.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="feature">
+
+                    <div class="feature-icon">
+                        🔄
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Automatic Stock Update
+                        </h3>
+
+                        <p>
+                            Recording a sale automatically decreases
+                            the available product quantity.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="panel">
+
+                <h2>
+                    System Information
+                </h2>
+
+                <div class="panel-desc">
+                    Current application details.
+                </div>
+
+
+                <div class="detail">
+
+                    <span>
+                        Application
+                    </span>
+
+                    <strong>
+                        National Steel
+                    </strong>
+
+                </div>
+
+
+                <div class="detail">
+
+                    <span>
+                        System
+                    </span>
+
+                    <strong>
+                        Owner Management
+                    </strong>
+
+                </div>
+
+
+                <div class="detail">
+
+                    <span>
+                        Database
+                    </span>
+
+                    <strong>
+                        SQLite
+                    </strong>
+
+                </div>
+
+
+                <div class="detail">
+
+                    <span>
+                        Platform
+                    </span>
+
+                    <strong>
+                        Flask
+                    </strong>
+
+                </div>
+
+
+                <div class="detail">
+
+                    <span>
+                        Access
+                    </span>
+
+                    <strong>
+                        Private Owner
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+    <div class="footer">
+        National Steel • Owner Management System • About
+    </div>
+
+
+</main>
+
+</div>
+
+</body>
+</html>
